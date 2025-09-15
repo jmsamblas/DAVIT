@@ -1,0 +1,2 @@
+recursive-include davit *
+recursive-exclude davit/ *.pyc

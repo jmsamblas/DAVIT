@@ -1,0 +1,4 @@
+QFrame#frame_holder{
+	background-color: white;
+}
+
