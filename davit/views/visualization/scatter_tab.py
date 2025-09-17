@@ -74,7 +74,7 @@ class ScatterTab(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -83,8 +83,8 @@ class ScatterTab(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -101,8 +101,8 @@ class ScatterTab(QWidget):
 
         # create frame for the plots
         self.frame_plots = QFrame(self.frame_holder)
-        self.frame_plots.setFrameShape(QFrame.NoFrame)
-        self.frame_plots.setFrameShadow(QFrame.Plain)
+        self.frame_plots.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_plots.setFrameShadow(QFrame.Shadow.Plain)
         self.frame_plots.setObjectName("frame_plots")
 
         # scroll size handling
@@ -146,8 +146,8 @@ class ScatterTab(QWidget):
 
         # frame for the toolbar at the bottom of the plot
         self.frame_bottom_of_the_plot = QFrame(self.frame_holder)
-        self.frame_bottom_of_the_plot.setFrameShape(QFrame.NoFrame)
-        self.frame_bottom_of_the_plot.setFrameShadow(QFrame.Plain)
+        self.frame_bottom_of_the_plot.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_bottom_of_the_plot.setFrameShadow(QFrame.Shadow.Plain)
         self.frame_bottom_of_the_plot.setObjectName("frame_bottom_of_the_plot")
 
         # layout of the frame for the toolbar at the bottom of the plot
@@ -214,7 +214,7 @@ class ScatterTab(QWidget):
         self.enableBottomSelectionBar(False)
 
         # spacer to move everything to the left
-        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_bottom_of_the_plot.addItem(self.spacerItem)
 
         return

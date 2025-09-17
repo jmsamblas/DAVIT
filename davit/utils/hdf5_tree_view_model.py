@@ -195,13 +195,13 @@ class HDF5TreeViewModel(QStandardItemModel):
                 continue
 
             # get full path
-            full_path = item.data(Qt.UserRole)
+            full_path = item.data(Qt.ItemDataRole.UserRole)
 
             # get hdf5 path
             hdf_path = self.get_hdf5_path_from_index(index)
 
             # get display
-            display = item.data(Qt.DisplayRole)
+            display = item.data(Qt.ItemDataRole.DisplayRole)
 
             # init
             node = None
@@ -238,7 +238,7 @@ class HDF5TreeViewModel(QStandardItemModel):
             value["attrs_item"] = self.itemFromIndex(self.index(row, 3, parent)).text()
             value["dataset_item"] = self.itemFromIndex(self.index(row, 4, parent)).text()
             value["icon_str"] = self.itemFromIndex(self.index(row, 5, parent)).text()
-            value["tooltip_str"] = item.data(Qt.ToolTipRole)
+            value["tooltip_str"] = item.data(Qt.ItemDataRole.ToolTipRole)
             value["foreground_color"] = item.foreground().color().name()
 
             # apply filters
@@ -413,7 +413,7 @@ class HDF5TreeViewModel(QStandardItemModel):
 
         # init item
         tree_item = QStandardItem(str(node_name))
-        tree_item.setData(node_path, Qt.UserRole)
+        tree_item.setData(node_path, Qt.ItemDataRole.UserRole)
         tree_item.setToolTip(tooltip_str)
 
         # create items for the header info
@@ -430,8 +430,8 @@ class HDF5TreeViewModel(QStandardItemModel):
         tree_item.setForeground(QBrush(QColor(foreground_color)))
 
         # set foregrounds
-        attrs_item.setForeground(QBrush((Qt.darkGray)))
-        dataset_item.setForeground(QBrush((Qt.darkGray)))
+        attrs_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
+        dataset_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # append the row
         parent_item.appendRow([tree_item, type_item, hdf5_path_item, attrs_item, dataset_item, icon_str_item])
@@ -450,7 +450,7 @@ class HDF5TreeViewModel(QStandardItemModel):
 
         # create the main item
         tree_item = QStandardItem(str(node_name))
-        tree_item.setData(node_path, Qt.UserRole)
+        tree_item.setData(node_path, Qt.ItemDataRole.UserRole)
         tree_item.setToolTip(self.create_tooltip([], node_path))
 
         # create empty items for the header info
@@ -511,16 +511,16 @@ class HDF5TreeViewModel(QStandardItemModel):
 
         # init item
         tree_item = QStandardItem(node_name)
-        tree_item.setData(full_path, Qt.UserRole)
+        tree_item.setData(full_path, Qt.ItemDataRole.UserRole)
         tree_item.setToolTip(self.create_tooltip(node.attrs, full_path))
 
         # init type item
         type_item = QStandardItem('hdf5')
-        type_item.setForeground(QBrush((Qt.darkGray)))
+        type_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # init h5 path item
         hdf5_path_item = QStandardItem(str(hdf_path))
-        hdf5_path_item.setForeground(QBrush((Qt.darkGray)))
+        hdf5_path_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # create item for the number of attributes
         num_attrs = len(node.attrs)
@@ -530,7 +530,7 @@ class HDF5TreeViewModel(QStandardItemModel):
             attrs_item = QStandardItem('')
 
         # set foreground
-        attrs_item.setForeground(QBrush((Qt.darkGray)))
+        attrs_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # init
         icon_str_item = QStandardItem('')
@@ -560,7 +560,7 @@ class HDF5TreeViewModel(QStandardItemModel):
             ])
 
         # set foreground
-        dataset_item.setForeground(QBrush((Qt.darkGray)))
+        dataset_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # append the row
         parent_item.appendRow([tree_item, type_item, hdf5_path_item, attrs_item, dataset_item, icon_str_item])
@@ -598,17 +598,17 @@ class HDF5TreeViewModel(QStandardItemModel):
         self.progress_dialog_handle_expanded.setMinimumHeight(75)
         self.progress_dialog_handle_expanded.setMinimumWidth(600)
         self.progress_dialog_handle_expanded.setAutoClose(True)
-        self.progress_dialog_handle_expanded.setWindowModality(Qt.ApplicationModal)
+        self.progress_dialog_handle_expanded.setWindowModality(Qt.WindowModality.ApplicationModal)
         self.progress_dialog_handle_expanded.closeEvent = closeEventIgnore
         self.progress_dialog_handle_expanded.setWindowTitle("Progress")
         self.progress_dialog_handle_expanded.setWindowIcon(qta.icon("mdi6.timer-sand"))
         self.progress_dialog_handle_expanded.show()
         self.progress_dialog_handle_expanded.repaint()
-        self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
         self.progress_dialog_handle_expanded.setValue(0)
         self.progress_dialog_handle_expanded.repaint()
         sleep(0.025)
-        self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
         sleep(0.025)
 
     #----------------------------------------------#
@@ -617,7 +617,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         if self.progress_dialog_handle_expanded:
             self.progress_dialog_handle_expanded.setValue(i + 1)
             self.progress_dialog_handle_expanded.repaint()
-            self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
     #----------------------------------------------#
 
@@ -625,7 +625,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         if self.progress_dialog_handle_expanded:
             self.progress_dialog_handle_expanded.close()
             del self.progress_dialog_handle_expanded
-            self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
     #----------------------------------------------#
 
@@ -658,7 +658,7 @@ class HDF5TreeViewModel(QStandardItemModel):
 
         # the "full_path" is what's stored in the first column's UserRole
         # it may be an actual directory path or an HDF5 path with group info
-        full_path = item.data(Qt.UserRole)
+        full_path = item.data(Qt.ItemDataRole.UserRole)
 
         # -------------------------------------------------
         # 1) DIRECTORY CASE
@@ -778,7 +778,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         # show error message
         message_title = "Error"
         message_text = ("{}".format(xcp))
-        message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self.parent.global_parent)
+        message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.parent.global_parent)
         message_box.setWindowIcon(QIcon(self.parent.global_parent.window_icon_path))
         message_box.exec_()
 
@@ -789,7 +789,7 @@ class HDF5TreeViewModel(QStandardItemModel):
     def item_has_to_be_red(self, item, error_message):
 
         # item error
-        item.setForeground(QBrush((Qt.red)))
+        item.setForeground(QBrush((Qt.GlobalColor.red)))
         item.setToolTip(str(error_message))
 
         return
@@ -801,7 +801,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         # show message
         message_title = "Error"
         message_text = "The file cannot be opened because it is probably corrupted."
-        message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self.parent.global_parent)
+        message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.parent.global_parent)
         message_box.setWindowIcon(QIcon(self.parent.global_parent.window_icon_path))
         message_box.exec_()
 
@@ -830,7 +830,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         # first column index
         idx_col = index.siblingAtColumn(1)
         item_col = self.itemFromIndex(idx_col)
-        type = str(item_col.data(Qt.DisplayRole))
+        type = str(item_col.data(Qt.ItemDataRole.DisplayRole))
 
         return type
 
@@ -841,7 +841,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         # second column index
         idx_col = index.siblingAtColumn(2)
         item_col = self.itemFromIndex(idx_col)
-        type = str(item_col.data(Qt.DisplayRole))
+        type = str(item_col.data(Qt.ItemDataRole.DisplayRole))
 
         return type
 

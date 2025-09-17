@@ -164,7 +164,7 @@ class MainWindow(QMainWindow):
 
         # center main window
         frame_geometry = self.frameGeometry()
-        frame_geometry.moveCenter(QDesktopWidget().availableGeometry().center())
+        frame_geometry.moveCenter(screen_rect.center())
         self.move(frame_geometry.topLeft())
 
         return
@@ -198,8 +198,8 @@ class MainWindow(QMainWindow):
 
         # left side: qframe with a tree view (also a tab widget for the h5 and nxcals or postmortem)
         self.frame_left = QFrame(self.frame_main_app)
-        self.frame_left.setFrameShape(QFrame.NoFrame)
-        self.frame_left.setFrameShadow(QFrame.Raised)
+        self.frame_left.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_left.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_left.setObjectName("frame_left")
         self.verticalLayout_frame_left = QVBoxLayout(self.frame_left)
         self.verticalLayout_frame_left.setObjectName("verticalLayout_frame_left")
@@ -210,8 +210,8 @@ class MainWindow(QMainWindow):
         self.tabWidget_left = QTabWidget(self.frame_left)
         self.tabWidget_left.setDocumentMode(False)
         self.tabWidget_left.setStyleSheet("QTabWidget::pane#tabWidget_left {}")
-        self.tabWidget_left.setTabPosition(QTabWidget.North)
-        self.tabWidget_left.setTabShape(QTabWidget.Rounded)
+        self.tabWidget_left.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget_left.setTabShape(QTabWidget.TabShape.Rounded)
         self.tabWidget_left.setObjectName("tabWidget_left")
         self.verticalLayout_frame_left.addWidget(self.tabWidget_left)
 
@@ -243,8 +243,8 @@ class MainWindow(QMainWindow):
 
         # right side: qframe with a tab widget
         self.frame_right = QFrame(self.frame_main_app)
-        self.frame_right.setFrameShape(QFrame.NoFrame)
-        self.frame_right.setFrameShadow(QFrame.Raised)
+        self.frame_right.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_right.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_right.setObjectName("frame_right")
         self.verticalLayout_frame_right = QVBoxLayout(self.frame_right)
         self.verticalLayout_frame_right.setObjectName("verticalLayout_frame_right")
@@ -255,8 +255,8 @@ class MainWindow(QMainWindow):
         self.tabWidget_right = QTabWidget(self.frame_right)
         self.tabWidget_right.setDocumentMode(False)
         self.tabWidget_right.setStyleSheet("QTabWidget::pane#tabWidget_right {}")
-        self.tabWidget_right.setTabPosition(QTabWidget.North)
-        self.tabWidget_right.setTabShape(QTabWidget.Rounded)
+        self.tabWidget_right.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget_right.setTabShape(QTabWidget.TabShape.Rounded)
         self.tabWidget_right.setObjectName("tabWidget_right")
         self.verticalLayout_frame_right.addWidget(self.tabWidget_right)
 
@@ -268,7 +268,7 @@ class MainWindow(QMainWindow):
         self.horizontalLayout_frame_main_app.setStretch(1, 90)
 
         # splitter to separate both panels
-        self.splitter = QSplitter(Qt.Horizontal)
+        self.splitter = QSplitter(Qt.Orientation.Horizontal)
         self.splitter.addWidget(self.frame_left)
         self.splitter.addWidget(self.frame_right)
         self.splitter.setHandleWidth(10)
@@ -286,7 +286,7 @@ class MainWindow(QMainWindow):
 
         # splitter to separate both panels
         if self.dict_for_settings["setting_enable_system_monitor"]:
-            self.splitter_2 = QSplitter(Qt.Vertical)
+            self.splitter_2 = QSplitter(Qt.Orientation.Vertical)
             self.splitter_2.addWidget(self.frame_main_app)
             self.splitter_2.addWidget(self.system_monitor)
             self.splitter_2.setHandleWidth(10)
@@ -551,7 +551,7 @@ class MainWindow(QMainWindow):
         if not self.file_path:
             message_title = "Reload Problem"
             message_text = ("No directory is currently loaded... Open a folder first!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return
@@ -560,7 +560,7 @@ class MainWindow(QMainWindow):
         if self.current_filters_preset:
             message_title = "Reload Problem"
             message_text = ("Unable to reload with filters applied. Please deselect the filters and try reloading again.")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return
@@ -632,7 +632,7 @@ class MainWindow(QMainWindow):
             # show error
             message_title = "Error"
             message_text = ("Unable to open filters until a valid file or directory has been loaded!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 
@@ -683,14 +683,14 @@ class MainWindow(QMainWindow):
 
             # close last window
             self.filters_window.close()
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
             # open waiting widget
             self.waiting_widget = WaitingWidget(app=self.app, app_root_path=self.app_root_path, parent=self)
-            self.waiting_widget.setWindowModality(Qt.ApplicationModal)
+            self.waiting_widget.setWindowModality(Qt.WindowModality.ApplicationModal)
             self.waiting_widget.show()
             self.waiting_widget.repaint()
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
             # hide treeview during the search
             self.treeView_hdf5.setVisible(False)
@@ -704,7 +704,7 @@ class MainWindow(QMainWindow):
             # close the waiting animation widget
             self.waiting_widget.close()
             self.waiting_widget = None
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
             # init right panel
             if hide_right_panel:
@@ -820,7 +820,12 @@ class MainWindow(QMainWindow):
                 if file_or_dir == "file":
                     file_path, _ = QFileDialog.getOpenFileName(self, "Load HDF5 file", directory=default_dir, filter='HDF5 Files (*.hdf *.h5 *.hdf5);; All Files (*.*)')
                 elif file_or_dir == "dir":
-                    file_path = QFileDialog.getExistingDirectory(self, "Open directory", default_dir, QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
+                    file_path = QFileDialog.getExistingDirectory(
+                        self,
+                        "Open directory",
+                        default_dir,
+                        QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks,
+                    )
                 file_path = str(file_path)
             except Exception as xcp:
                 if verbose:
@@ -967,14 +972,14 @@ class MainWindow(QMainWindow):
             except NotImplementedError  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
@@ -1172,7 +1177,7 @@ class MainWindow(QMainWindow):
             for counter, index in enumerate(index_list):
 
                 # get data
-                data = model.itemFromIndex(index).data(Qt.UserRole)
+                data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
                 # if there is no data just skip
                 if data.size == 0:
@@ -1201,14 +1206,14 @@ class MainWindow(QMainWindow):
             except NotImplementedError  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
@@ -1252,10 +1257,10 @@ class MainWindow(QMainWindow):
             for counter, index in enumerate(index_list):
 
                 # get data
-                data = model.itemFromIndex(index).data(Qt.UserRole)
+                data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
                 # get display name
-                display = model.itemFromIndex(index).data(Qt.DisplayRole)
+                display = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
                 # if there is no data just skip
                 if data.size == 0:
@@ -1303,10 +1308,10 @@ class MainWindow(QMainWindow):
             for counter, index in enumerate(index_list):
 
                 # get data
-                data = model.itemFromIndex(index).data(Qt.UserRole)
+                data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
                 # get display name
-                display = model.itemFromIndex(index).data(Qt.DisplayRole)
+                display = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
                 # if there is no data just skip
                 if data.size == 0:
@@ -1423,14 +1428,14 @@ class MainWindow(QMainWindow):
 
         # NXCALS route: when model is provided
         if model is not None and index is not None:
-            display_name = model.data(index, Qt.DisplayRole)
+            display_name = model.data(index, Qt.ItemDataRole.DisplayRole)
             rows = model.rowCount(index)
             if rows == 0:
                 return pd.DataFrame([])
             for row in range(rows):
                 child_index = model.index(row, 0, index)
-                key = model.data(child_index, Qt.DisplayRole)
-                data = model.data(child_index, Qt.UserRole)
+                key = model.data(child_index, Qt.ItemDataRole.DisplayRole)
+                data = model.data(child_index, Qt.ItemDataRole.UserRole)
                 if data is None:
                     continue
                 try:
@@ -1492,7 +1497,7 @@ class MainWindow(QMainWindow):
             if len(set(lengths)) != 1:
                 message_title = "Error: Mismatched Dimensions"
                 message_text = "Not all children have the same number of elements. Unable to merge."
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return pd.DataFrame([])
@@ -1506,7 +1511,7 @@ class MainWindow(QMainWindow):
             message_title = "Error: Incompatible Child Shapes"
             message_text = ("Unable to perform auto merging because the children inside the group "
                             "are not all scalars or all 1D arrays.")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return pd.DataFrame([])
@@ -1564,7 +1569,7 @@ class MainWindow(QMainWindow):
                 f"Memory Required: {mem_required_in_mb + safety_margin_mb:.2f} MB\n"
                 f"Memory Available: {available_memory_mb:.2f} MB"
             )
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon((QIcon(self.window_icon_path)))
             message_box.exec_()
             return None, None, None, "memory_error"
@@ -1575,10 +1580,10 @@ class MainWindow(QMainWindow):
             if auto_merging:
                 mem_required_in_mb = "Unknown"
             self.waiting_widget_create_df = WaitingWidgetCreateDf(app=self.app, app_root_path=self.app_root_path, parent=self, memory_in_mb=mem_required_in_mb)
-            self.waiting_widget_create_df.setWindowModality(Qt.ApplicationModal)
+            self.waiting_widget_create_df.setWindowModality(Qt.WindowModality.ApplicationModal)
             self.waiting_widget_create_df.show()
             self.waiting_widget_create_df.repaint()
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         # init dtype
         dtype = None
@@ -1693,7 +1698,7 @@ class MainWindow(QMainWindow):
         if self.waiting_widget_create_df:
             self.waiting_widget_create_df.close()
             self.waiting_widget_create_df = None
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return df, attributes, chunk_size, ""
 
@@ -1736,10 +1741,10 @@ class MainWindow(QMainWindow):
         if tree_type == "nxcals" or tree_type == "postmortem":
 
             # get data
-            data = model.itemFromIndex(index).data(Qt.UserRole)
+            data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
             # get display name
-            display = model.itemFromIndex(index).data(Qt.DisplayRole)
+            display = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
             # check it is not the same item
             if tree_type == "nxcals":
@@ -1795,7 +1800,7 @@ class MainWindow(QMainWindow):
             hdf_path = model.get_hdf5_path_from_index(index)
 
             # get path
-            path = model.itemFromIndex(index).data(Qt.UserRole)
+            path = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
             path = os.path.relpath(path, hdf_path)
 
             # get node
@@ -1807,7 +1812,7 @@ class MainWindow(QMainWindow):
                 return
 
             # get display name
-            display = model.itemFromIndex(index).data(Qt.DisplayRole)
+            display = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
             # check it is a dataframe or not
             is_it_df = self.isItDataframeNode(node)
@@ -1945,7 +1950,7 @@ class MainWindow(QMainWindow):
         # update view to empty selection
         if empty_selection_in_tree:
             self.update()
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return
 
@@ -1969,7 +1974,7 @@ class MainWindow(QMainWindow):
             # remove the last n_removed_tabs
             for tab in range(removed_tabs_start_index, total_tabs):
                 widget = self.tabWidget_right.widget(removed_tabs_start_index)
-                widget.setAttribute(Qt.WA_DeleteOnClose)
+                widget.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
                 widget.close()
                 self.tabWidget_right.removeTab(removed_tabs_start_index)
 
@@ -2145,7 +2150,7 @@ class MainWindow(QMainWindow):
             "Java dependencies for the application.\n\n"
             "Please restart DAVIT to apply the changes and ensure that all components function properly."
         )
-        message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+        message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
         message_box.setWindowIcon(QIcon(self.window_icon_path))
         message_box.exec_()
         return

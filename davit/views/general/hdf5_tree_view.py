@@ -38,8 +38,8 @@ class HDF5TreeView(QFrame):
     def buildTree(self):
 
         # disable borders
-        self.setFrameShape(QFrame.NoFrame)
-        self.setFrameShadow(QFrame.Raised)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setFrameShadow(QFrame.Shadow.Raised)
 
         # main holder layout
         self.verticalLayout_holder = QVBoxLayout(self)
@@ -49,12 +49,12 @@ class HDF5TreeView(QFrame):
 
         # create the tree view
         self.treeView = QTreeView(self)
-        self.treeView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.treeView.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.treeView.setFrameShape(QFrame.NoFrame)
-        self.treeView.setFrameShadow(QFrame.Plain)
-        self.treeView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.treeView.setTextElideMode(Qt.ElideMiddle)
+        self.treeView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.treeView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.treeView.setFrameShape(QFrame.Shape.NoFrame)
+        self.treeView.setFrameShadow(QFrame.Shadow.Plain)
+        self.treeView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.treeView.setTextElideMode(Qt.TextElideMode.ElideMiddle)
         self.treeView.setIndentation(10)
         self.treeView.setUniformRowHeights(True)
         self.treeView.setObjectName("treeView")
@@ -82,7 +82,7 @@ class HDF5TreeView(QFrame):
         self.treeView.selectionModel().selectionChanged.connect(lambda: self.itemFromTreeviewSelectionChanged(model=model))
 
         # set up the right click menu handler
-        self.treeView.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.treeView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.treeView.customContextMenuRequested.connect(lambda position: self.openRightClickTreeMenu(position = position, model = model))
 
         return
@@ -134,7 +134,7 @@ class HDF5TreeView(QFrame):
                 hdf_path_list.append(hdf_path)
 
                 # get node
-                path = model.itemFromIndex(index).data(Qt.UserRole)
+                path = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
                 path = os.path.relpath(path, hdf_path)
                 path_list.append(path)
                 node = None
@@ -411,8 +411,8 @@ class HDF5TreeView(QFrame):
         hdf_path = model.get_hdf5_path_from_index(index)
 
         # get node and display
-        display_name = model.itemFromIndex(index).data(Qt.DisplayRole)
-        full_path = model.itemFromIndex(index).data(Qt.UserRole)
+        display_name = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
+        full_path = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
         path = os.path.relpath(full_path, hdf_path)
         node = None
         if hdf_path:
@@ -561,7 +561,7 @@ class HDF5TreeView(QFrame):
 
     def is_df_node(self, model, index):
         hdf_path = model.get_hdf5_path_from_index(index)
-        full_path = model.itemFromIndex(index).data(Qt.UserRole)
+        full_path = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
         if not hdf_path:
             return False
         path = os.path.relpath(full_path, hdf_path)

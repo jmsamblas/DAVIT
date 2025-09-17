@@ -73,8 +73,8 @@ class NXCALSTreeView(QFrame):
         previous_current_date = current_date.addDays(-1)
 
         # disable borders
-        self.setFrameShape(QFrame.NoFrame)
-        self.setFrameShadow(QFrame.Raised)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setFrameShadow(QFrame.Shadow.Raised)
 
         # main holder layout
         self.verticalLayout_holder = QVBoxLayout(self)
@@ -84,12 +84,12 @@ class NXCALSTreeView(QFrame):
 
         # create the tree view
         self.treeView = QTreeView(self)
-        self.treeView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.treeView.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.treeView.setFrameShape(QFrame.NoFrame)
-        self.treeView.setFrameShadow(QFrame.Plain)
-        self.treeView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.treeView.setTextElideMode(Qt.ElideMiddle)
+        self.treeView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.treeView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.treeView.setFrameShape(QFrame.Shape.NoFrame)
+        self.treeView.setFrameShadow(QFrame.Shadow.Plain)
+        self.treeView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.treeView.setTextElideMode(Qt.TextElideMode.ElideMiddle)
         self.treeView.setIndentation(10)
         self.treeView.setUniformRowHeights(True)
         self.treeView.setObjectName("treeView")
@@ -115,8 +115,8 @@ class NXCALSTreeView(QFrame):
 
         # frame for the search queries
         self.frame_search = QFrame(self.frame_holder_search)
-        self.frame_search.setFrameShape(QFrame.NoFrame)
-        self.frame_search.setFrameShadow(QFrame.Raised)
+        self.frame_search.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_search.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_search.setObjectName("frame_search")
 
         # set the main frame as the widget of the QScrollArea
@@ -152,7 +152,7 @@ class NXCALSTreeView(QFrame):
         self.label_query.setObjectName("label_query")
         self.label_query.setText("Query")
         self.label_query.setFont(font)
-        self.label_query.setAlignment(Qt.AlignCenter)
+        self.label_query.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_query, 0, 0)
 
         # create lineedit for the queries
@@ -166,7 +166,7 @@ class NXCALSTreeView(QFrame):
         self.label_ts_start.setObjectName("label_ts_start")
         self.label_ts_start.setText("TS1")
         self.label_ts_start.setFont(font)
-        self.label_ts_start.setAlignment(Qt.AlignCenter)
+        self.label_ts_start.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_ts_start, 1, 0)
 
         # create date edit for the ts1
@@ -188,7 +188,7 @@ class NXCALSTreeView(QFrame):
         self.label_ts_end.setObjectName("label_ts_end")
         self.label_ts_end.setText("TS2")
         self.label_ts_end.setFont(font)
-        self.label_ts_end.setAlignment(Qt.AlignCenter)
+        self.label_ts_end.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_ts_end, 2, 0)
 
         # create date edit for the ts2
@@ -217,7 +217,7 @@ class NXCALSTreeView(QFrame):
         self.horizontalLayout_frame_search_accept.setObjectName("horizontalLayout_frame_search_accept")
 
         # spacer item
-        self.spacer_item_search_accept = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_item_search_accept = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_search_accept.addItem(self.spacer_item_search_accept)
 
         # threads panel button
@@ -231,7 +231,7 @@ class NXCALSTreeView(QFrame):
 
         # create button for checking initialization
         self.pushButton_pytimber_init = UnclickablePushButton(self.frame_search_accept)
-        self.pushButton_pytimber_init.setFocusPolicy(Qt.NoFocus)
+        self.pushButton_pytimber_init.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.pushButton_pytimber_init.setObjectName("pushButton_pytimber_init")
         self.pushButton_pytimber_init.setText("NX")
         self.pushButton_pytimber_init.setFixedWidth(24)
@@ -364,7 +364,7 @@ class NXCALSTreeView(QFrame):
         else:
             message_title = "Error"
             message_text = ("Please, initialize PyTimber and run a valid query in order to open the NXCALS Threads panel.")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
             message_box.exec_()
             return
@@ -386,7 +386,7 @@ class NXCALSTreeView(QFrame):
             self.waiting_widget.can_be_closed = True
             self.waiting_widget.close()
             self.waiting_widget = None
-            self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
             # enable autocomplete
             self.lineEdit_query.textChanged.connect(self.updateAutocomplete)
@@ -442,8 +442,8 @@ class NXCALSTreeView(QFrame):
 
         # completer for the lineedit
         self.search_completer = QCompleter(list_to_inject, self)
-        self.search_completer.setCaseSensitivity(Qt.CaseInsensitive)
-        self.search_completer.setFilterMode(Qt.MatchStartsWith)
+        self.search_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        self.search_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
         self.lineEdit_query.setCompleter(self.search_completer)
 
         return
@@ -460,12 +460,12 @@ class NXCALSTreeView(QFrame):
         self.waiting_widget.setModal(True)
         self.waiting_widget.show()
         self.waiting_widget.repaint()
-        self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         # update label
         self.waiting_widget.updateLabel(" Connecting to NXCALS...")
         self.waiting_widget.repaint()
-        self.global_parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.global_parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         # init pytimber on threads panel
         self.threads_panel.initPyTimber()
@@ -499,7 +499,7 @@ class NXCALSTreeView(QFrame):
             # show message
             message_title = "Error"
             message_text = ("Query format is not valid!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
             message_box.exec_()
 
@@ -562,7 +562,7 @@ class NXCALSTreeView(QFrame):
         self.treeView.selectionModel().selectionChanged.connect(lambda: self.itemFromTreeviewSelectionChanged(model=model))
 
         # set up the right click menu handler
-        self.treeView.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.treeView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.treeView.customContextMenuRequested.connect(lambda position: self.openRightClickTreeMenu(position = position, model = model))
 
         return
@@ -792,7 +792,7 @@ class NXCALSTreeView(QFrame):
             # show message
             message_title = "Error"
             message_text = ("Unable to init the NXCALS treeview as there are threads still running!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
             message_box.exec_()
 
@@ -866,10 +866,10 @@ class NXCALSTreeView(QFrame):
         if not does_it_have_children:
 
             # get data
-            data = model.itemFromIndex(index).data(Qt.UserRole)
+            data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
             # get display name
-            display_name = model.itemFromIndex(index).data(Qt.DisplayRole)
+            display_name = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
             # get full path made of display names
             full_path = self.get_parent_display_names(model, index)
@@ -988,7 +988,7 @@ class NXCALSTreeView(QFrame):
         display_names = []
         while current_index.isValid():
             item = model.itemFromIndex(current_index)
-            display_name = item.data(Qt.DisplayRole)
+            display_name = item.data(Qt.ItemDataRole.DisplayRole)
             parent_index = current_index.parent()
             if exclude_root and not parent_index.isValid():
                 break

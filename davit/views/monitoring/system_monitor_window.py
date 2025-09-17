@@ -215,7 +215,7 @@ class SystemInfoWidget(QFrame):
         self.cpu_count_label.setText("0 Cores")
 
         # spacer item 1
-        self.spacer_1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.spacer_1 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.layout.addItem(self.spacer_1)
 
         # add labels
@@ -231,7 +231,7 @@ class SystemInfoWidget(QFrame):
         self.layout.addWidget(self.cpu_count_label, 5, 1)
 
         # spacer item 2
-        self.spacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.spacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.layout.addItem(self.spacer_2)
 
         # set layout
@@ -291,8 +291,8 @@ class SystemMonitorWindow(QFrame):
         # more styling for the frame
         self.setStyleSheet(f"QFrame {{ background-color: {BACKGROUND_COLOR} }}")
         self.setContentsMargins(0, 0, 0, 0)
-        self.setFrameShape(QFrame.StyledPanel)
-        self.setFrameShadow(QFrame.Raised)
+        self.setFrameShape(QFrame.Shape.StyledPanel)
+        self.setFrameShadow(QFrame.Shadow.Raised)
         self.setMinimumHeight(140)
 
         return
@@ -304,7 +304,7 @@ class SystemMonitorWindow(QFrame):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -313,8 +313,8 @@ class SystemMonitorWindow(QFrame):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea

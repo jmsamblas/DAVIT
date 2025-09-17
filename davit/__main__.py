@@ -20,9 +20,9 @@ import argparse
 
 # IMPORTS (BEFORE SPLASH SCREEN)
 
-from PyQt5.QtGui import (QPixmap, QFont)
-from PyQt5.QtWidgets import (QSplashScreen, QApplication)
-from PyQt5.QtCore import Qt
+from PyQt6.QtGui import QPixmap, QFont
+from PyQt6.QtWidgets import QSplashScreen, QApplication
+from PyQt6.QtCore import Qt, QTimer
 
 #################################################################
 #################################################################
@@ -45,7 +45,11 @@ def show_splash(app, image_path, font_size=10, scale_factor=0.60):
 
     # load and scale the pixmap
     splash_pix = QPixmap(image_path)
-    scaled_splash_pix = splash_pix.scaled(splash_width, splash_height, Qt.KeepAspectRatio)
+    scaled_splash_pix = splash_pix.scaled(
+        splash_width,
+        splash_height,
+        Qt.AspectRatioMode.KeepAspectRatio,
+    )
 
     # create the splash screen
     splash = CustomSplashScreen(scaled_splash_pix)
@@ -54,7 +58,11 @@ def show_splash(app, image_path, font_size=10, scale_factor=0.60):
     font = QFont()
     font.setPointSize(font_size)
     splash.setFont(font)
-    splash.showMessage("Initializing...", alignment = int(Qt.AlignBottom) | int(Qt.AlignHCenter), color = Qt.black)
+    splash.showMessage(
+        "Initializing...",
+        alignment=Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignHCenter,
+        color=Qt.GlobalColor.black,
+    )
 
     # show the splash screen
     splash.show()

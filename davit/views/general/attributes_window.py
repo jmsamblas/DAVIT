@@ -84,7 +84,7 @@ class AttributesWindow(QWidget):
 
         # center main window
         frame_geometry = self.frameGeometry()
-        frame_geometry.moveCenter(QDesktopWidget().availableGeometry().center())
+        frame_geometry.moveCenter(screen_rect.center())
         self.move(frame_geometry.topLeft())
 
         return
@@ -96,7 +96,7 @@ class AttributesWindow(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -105,8 +105,8 @@ class AttributesWindow(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -131,7 +131,7 @@ class AttributesWindow(QWidget):
         self.display_label = QLabel(self.label_frame)
         self.display_label.setObjectName("display_label")
         self.display_label.setText(self.display_path)
-        self.display_label.setAlignment(Qt.AlignCenter)
+        self.display_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.display_label.setWordWrap(True)
 
         # add the label to the frame's layout

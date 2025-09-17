@@ -35,7 +35,7 @@
       <string>This panel allows to select variables and optionally split them into separate y-axes. Use different axes for variables with distinct scales for improved readability.</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -45,10 +45,10 @@
    <item>
     <widget class="QFrame" name="frame_listviews">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_frame_listviews">
       <property name="topMargin">
@@ -66,10 +66,10 @@
       <item row="0" column="1">
        <widget class="QFrame" name="frame_variables">
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
+         <enum>QFrame::Shadow::Raised</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_frame_variables">
          <property name="spacing">
@@ -97,7 +97,7 @@
          <item>
           <spacer name="horizontalSpacer_frame_variables">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -135,10 +135,10 @@
       <item row="0" column="0">
        <widget class="QFrame" name="frame_axis">
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
+         <enum>QFrame::Shadow::Raised</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_frame_axis">
          <property name="spacing">
@@ -166,7 +166,7 @@
          <item>
           <spacer name="horizontalSpacer_frame_axis">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -204,16 +204,16 @@
    <item>
     <widget class="QFrame" name="frame_bottom">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_bottom">
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>

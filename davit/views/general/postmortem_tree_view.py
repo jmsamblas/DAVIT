@@ -69,8 +69,8 @@ class PostMortemTreeView(QFrame):
         previous_current_date = current_date.addDays(-1)
 
         # disable borders
-        self.setFrameShape(QFrame.NoFrame)
-        self.setFrameShadow(QFrame.Raised)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setFrameShadow(QFrame.Shadow.Raised)
 
         # main holder layout
         self.verticalLayout_holder = QVBoxLayout(self)
@@ -80,12 +80,12 @@ class PostMortemTreeView(QFrame):
 
         # create the tree view
         self.treeView = QTreeView(self)
-        self.treeView.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.treeView.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.treeView.setFrameShape(QFrame.NoFrame)
-        self.treeView.setFrameShadow(QFrame.Plain)
-        self.treeView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.treeView.setTextElideMode(Qt.ElideMiddle)
+        self.treeView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.treeView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.treeView.setFrameShape(QFrame.Shape.NoFrame)
+        self.treeView.setFrameShadow(QFrame.Shadow.Plain)
+        self.treeView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.treeView.setTextElideMode(Qt.TextElideMode.ElideMiddle)
         self.treeView.setIndentation(10)
         self.treeView.setUniformRowHeights(True)
         self.treeView.setObjectName("treeView")
@@ -111,8 +111,8 @@ class PostMortemTreeView(QFrame):
 
         # frame for the search queries
         self.frame_search = QFrame(self.frame_holder_search)
-        self.frame_search.setFrameShape(QFrame.NoFrame)
-        self.frame_search.setFrameShadow(QFrame.Raised)
+        self.frame_search.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_search.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_search.setObjectName("frame_search")
 
         # set the main frame as the widget of the QScrollArea
@@ -148,7 +148,7 @@ class PostMortemTreeView(QFrame):
         self.label_system.setObjectName("label_system")
         self.label_system.setText("System")
         self.label_system.setFont(font)
-        self.label_system.setAlignment(Qt.AlignCenter)
+        self.label_system.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_system, 0, 0)
 
         # label for the class name entry
@@ -156,7 +156,7 @@ class PostMortemTreeView(QFrame):
         self.label_class_name.setObjectName("label_class_name")
         self.label_class_name.setText("Class Name")
         self.label_class_name.setFont(font)
-        self.label_class_name.setAlignment(Qt.AlignCenter)
+        self.label_class_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_class_name, 1, 0)
 
         # label for the source entry
@@ -164,7 +164,7 @@ class PostMortemTreeView(QFrame):
         self.label_source.setObjectName("label_source")
         self.label_source.setText("Source")
         self.label_source.setFont(font)
-        self.label_source.setAlignment(Qt.AlignCenter)
+        self.label_source.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_source, 2, 0)
 
         # create lineedit for the system entry
@@ -187,7 +187,7 @@ class PostMortemTreeView(QFrame):
         self.label_ts_start.setObjectName("label_ts_start")
         self.label_ts_start.setText("TS1")
         self.label_ts_start.setFont(font)
-        self.label_ts_start.setAlignment(Qt.AlignCenter)
+        self.label_ts_start.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_ts_start, 3, 0)
 
         # create date edit for the ts1
@@ -209,7 +209,7 @@ class PostMortemTreeView(QFrame):
         self.label_ts_end.setObjectName("label_ts_end")
         self.label_ts_end.setText("TS2")
         self.label_ts_end.setFont(font)
-        self.label_ts_end.setAlignment(Qt.AlignCenter)
+        self.label_ts_end.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_frame_search_edits.addWidget(self.label_ts_end, 4, 0)
 
         # create date edit for the ts2
@@ -238,7 +238,7 @@ class PostMortemTreeView(QFrame):
         self.horizontalLayout_frame_search_accept.setObjectName("horizontalLayout_frame_search_accept")
 
         # spacer item
-        self.spacer_item_search_accept = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_item_search_accept = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_search_accept.addItem(self.spacer_item_search_accept)
 
         # threads panel button
@@ -381,7 +381,7 @@ class PostMortemTreeView(QFrame):
             # show message
             message_title = "Error"
             message_text = ("Query format is not valid!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
             message_box.exec_()
 
@@ -419,7 +419,7 @@ class PostMortemTreeView(QFrame):
         self.treeView.selectionModel().selectionChanged.connect(lambda: self.itemFromTreeviewSelectionChanged(model=model))
 
         # set up the right click menu handler
-        self.treeView.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.treeView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.treeView.customContextMenuRequested.connect(lambda position: self.openRightClickTreeMenu(position = position, model = model))
 
         return
@@ -649,7 +649,7 @@ class PostMortemTreeView(QFrame):
             # show message
             message_title = "Error"
             message_text = ("Unable to init the PostMortem treeview as there are threads still running!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
             message_box.exec_()
 
@@ -723,10 +723,10 @@ class PostMortemTreeView(QFrame):
         if not does_it_have_children:
 
             # get data
-            data = model.itemFromIndex(index).data(Qt.UserRole)
+            data = model.itemFromIndex(index).data(Qt.ItemDataRole.UserRole)
 
             # get display name
-            display_name = model.itemFromIndex(index).data(Qt.DisplayRole)
+            display_name = model.itemFromIndex(index).data(Qt.ItemDataRole.DisplayRole)
 
             # get full path made of display names
             full_path = self.get_parent_display_names(model, index)
@@ -845,7 +845,7 @@ class PostMortemTreeView(QFrame):
         display_names = []
         while current_index.isValid():
             item = model.itemFromIndex(current_index)
-            display_name = item.data(Qt.DisplayRole)
+            display_name = item.data(Qt.ItemDataRole.DisplayRole)
             parent_index = current_index.parent()
             if exclude_root and not parent_index.isValid():
                 break

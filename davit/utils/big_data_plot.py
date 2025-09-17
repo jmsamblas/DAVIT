@@ -216,16 +216,16 @@ class PlotDataClass:
             self.progress_dialog.setMinimumHeight(75)
             self.progress_dialog.setMinimumWidth(600)
             self.progress_dialog.setAutoClose(False)
-            self.progress_dialog.setWindowModality(Qt.ApplicationModal)
+            self.progress_dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
             self.progress_dialog.closeEvent = closeEventIgnore
             self.progress_dialog.setWindowTitle("Progress")
             self.progress_dialog.setWindowIcon(qta.icon("mdi6.timer-sand"))
             self.progress_dialog.show()
             self.progress_dialog.repaint()
-            self._app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self._app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
             self.progress_dialog.setValue(0)
             self.progress_dialog.repaint()
-            self._app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self._app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         out = {}
         dat = None
@@ -241,7 +241,7 @@ class PlotDataClass:
             if use_progress_bar:
                 self.progress_dialog.setValue(c_lv)
                 self.progress_dialog.repaint()
-                self._app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self._app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         if use_progress_bar:
             self.progress_dialog.close()

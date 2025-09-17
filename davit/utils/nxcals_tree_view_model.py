@@ -41,10 +41,10 @@ class NXCALSTreeViewModel(QStandardItemModel):
 
     #----------------------------------------------#
 
-    def data(self, index, role=Qt.DisplayRole):
+    def data(self, index, role=Qt.ItemDataRole.DisplayRole):
 
         # only intercept display role for Shape column
-        if role == Qt.DisplayRole and index.column() == self.shape_column:
+        if role == Qt.ItemDataRole.DisplayRole and index.column() == self.shape_column:
 
             # detect top-level items (invisible root's direct children)
             is_top_level = not index.parent().isValid()
@@ -62,7 +62,7 @@ class NXCALSTreeViewModel(QStandardItemModel):
                 return ""
 
             # otherwise, display numpy array shape (e.g., "(0,)" for empty arrays)
-            arr = tree_item.data(Qt.UserRole)
+            arr = tree_item.data(Qt.ItemDataRole.UserRole)
             shape = getattr(arr, 'shape', ())
             return str(shape)
 
@@ -146,7 +146,7 @@ class NXCALSTreeViewModel(QStandardItemModel):
 
         # init item
         tree_item = QStandardItem(str(node_name))
-        tree_item.setData(node_data, Qt.UserRole)
+        tree_item.setData(node_data, Qt.ItemDataRole.UserRole)
 
         # create empty items for the query info
         ts1_item = QStandardItem(ts1)
@@ -163,10 +163,10 @@ class NXCALSTreeViewModel(QStandardItemModel):
         tree_item.setIcon(QIcon(qta.icon(qta_icon_str)))
 
         # set foregrounds
-        ts1_item.setForeground(QBrush((Qt.darkGray)))
-        ts2_item.setForeground(QBrush((Qt.darkGray)))
-        elapsed_time_item.setForeground(QBrush((Qt.darkGray)))
-        shape_item.setForeground(QBrush((Qt.darkGray)))
+        ts1_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
+        ts2_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
+        elapsed_time_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
+        shape_item.setForeground(QBrush((Qt.GlobalColor.darkGray)))
 
         # append the row
         parent_item.appendRow([tree_item, ts1_item, ts2_item, elapsed_time_item, shape_item])

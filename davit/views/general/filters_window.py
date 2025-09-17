@@ -87,27 +87,27 @@ class FiltersWindow(QDialog):
         # add all labels
         self.label_atr_bt = QLabel(self.scrollAreaContents)
         self.label_atr_bt.setFont(font)
-        self.label_atr_bt.setAlignment(Qt.AlignCenter)
+        self.label_atr_bt.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_atr_bt.setObjectName("label_atr_bt")
         self.gridLayout_scrollAreaContents.addWidget(self.label_atr_bt, 0, 0, 1, 1)
         self.label_atr_key = QLabel(self.scrollAreaContents)
         self.label_atr_key.setFont(font)
-        self.label_atr_key.setAlignment(Qt.AlignCenter)
+        self.label_atr_key.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_atr_key.setObjectName("label_atr_key")
         self.gridLayout_scrollAreaContents.addWidget(self.label_atr_key, 0, 1, 1, 1)
         self.label_atr_val1 = QLabel(self.scrollAreaContents)
         self.label_atr_val1.setFont(font)
-        self.label_atr_val1.setAlignment(Qt.AlignCenter)
+        self.label_atr_val1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_atr_val1.setObjectName("label_atr_val1")
         self.gridLayout_scrollAreaContents.addWidget(self.label_atr_val1, 0, 2, 1, 1)
         self.label_atr_val2 = QLabel(self.scrollAreaContents)
         self.label_atr_val2.setFont(font)
-        self.label_atr_val2.setAlignment(Qt.AlignCenter)
+        self.label_atr_val2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_atr_val2.setObjectName("label_atr_val2")
         self.gridLayout_scrollAreaContents.addWidget(self.label_atr_val2, 0, 3, 1, 1)
         self.label_atr_type = QLabel(self.scrollAreaContents)
         self.label_atr_type.setFont(font)
-        self.label_atr_type.setAlignment(Qt.AlignCenter)
+        self.label_atr_type.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_atr_type.setObjectName("label_atr_type")
         self.gridLayout_scrollAreaContents.addWidget(self.label_atr_type, 0, 4, 1, 1)
         self.gridLayout_scrollAreaContents.setColumnStretch(0, 10)
@@ -158,7 +158,7 @@ class FiltersWindow(QDialog):
         self.pushButtons_plus["row_{}_col_{}".format(row,col)].setIcon(qta.icon("fa.plus-square"))
         self.pushButtons_plus["row_{}_col_{}".format(row, col)].setStyleSheet("background-color: #e6ffb3;")
         self.pushButtons_plus["row_{}_col_{}".format(row, col)].setMaximumWidth(40)
-        self.pushButtons_plus["row_{}_col_{}".format(row, col)].setFocusPolicy(Qt.NoFocus)
+        self.pushButtons_plus["row_{}_col_{}".format(row, col)].setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.pushButtons_plus["row_{}_col_{}".format(row, col)].clicked.connect(lambda: self.addAttrRow(row=row))
         self.gridLayout_scrollAreaContents.addWidget(self.pushButtons_plus["row_{}_col_{}".format(row,col)], row, col)
 
@@ -187,7 +187,7 @@ class FiltersWindow(QDialog):
         self.pushButtons_minus["row_{}_col_{}".format(row,col)].setIcon(qta.icon("fa.minus-square"))
         self.pushButtons_minus["row_{}_col_{}".format(row, col)].setStyleSheet("background-color: #ffb3b3;")
         self.pushButtons_minus["row_{}_col_{}".format(row, col)].setMaximumWidth(40)
-        self.pushButtons_minus["row_{}_col_{}".format(row, col)].setFocusPolicy(Qt.NoFocus)
+        self.pushButtons_minus["row_{}_col_{}".format(row, col)].setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.pushButtons_minus["row_{}_col_{}".format(row, col)].clicked.connect(lambda: self.removeAttrRow(row=row))
         self.gridLayout_scrollAreaContents.addWidget(self.pushButtons_minus["row_{}_col_{}".format(row,col)], row, col)
 
@@ -213,7 +213,7 @@ class FiltersWindow(QDialog):
 
         for col in range(self.gridLayout_scrollAreaContents.columnCount()):
             key = "row_{}_col_{}".format(row, col)
-            item = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+            item = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
             self.spacerItems[key] = item
             self.gridLayout_scrollAreaContents.addItem(item, row, col)
 
@@ -292,7 +292,7 @@ class FiltersWindow(QDialog):
             # show error message
             message_title = "Error"
             message_text = "You have reached the maximum number of allowed filters!"
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
             message_box.exec_()
 
@@ -334,7 +334,7 @@ class FiltersWindow(QDialog):
             # show error message
             message_title = "Error"
             message_text = "At least one filter is needed!"
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
             message_box.exec_()
 
@@ -397,7 +397,7 @@ class FiltersWindow(QDialog):
             if message_box:
                 message_title = "Success"
                 message_text = ("Successfully saved preset: {}".format(file_name))
-                message_box = QMessageBox(QMessageBox.Information, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
                 message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
                 message_box.exec_()
 

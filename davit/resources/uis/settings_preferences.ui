@@ -42,7 +42,7 @@
 (1) Warning: closing this panel will apply changes and reset the current state automatically.</string>
      </property>
      <property name="textFormat">
-      <enum>Qt::AutoText</enum>
+      <enum>Qt::TextFormat::AutoText</enum>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -67,7 +67,7 @@
       <string>General</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
      </property>
     </widget>
    </item>
@@ -97,10 +97,10 @@
    <item>
     <widget class="QFrame" name="frame_min_big_data_sample_size">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_min_big_data_sample_size">
       <property name="spacing">
@@ -153,7 +153,7 @@
       <item>
        <spacer name="horizontalSpacer_min_big_data_sample_size">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -169,10 +169,10 @@
    <item>
     <widget class="QFrame" name="frame_max_n_columns">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_max_n_columns">
       <property name="spacing">
@@ -222,7 +222,7 @@
       <item>
        <spacer name="horizontalSpacer_max_n_columns">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -238,7 +238,7 @@
    <item>
     <spacer name="verticalSpacer_general">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
@@ -306,10 +306,10 @@
    <item>
     <widget class="QFrame" name="frame_ncurves_at_init">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_ncurves_at_init">
       <property name="spacing">
@@ -362,7 +362,7 @@
       <item>
        <spacer name="horizontalSpacer_ncurves_at_init">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -378,7 +378,7 @@
    <item>
     <spacer name="verticalSpacer_visualization">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
@@ -420,10 +420,10 @@
    <item>
     <widget class="QFrame" name="frame_refresh_rate_system_monitor">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_refresh_rate_system_monitor">
       <property name="spacing">
@@ -460,7 +460,7 @@
          </size>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
         <property name="suffix">
          <string> s</string>
@@ -479,7 +479,7 @@
       <item>
        <spacer name="horizontalSpacer_refresh_rate_system_monitor">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -495,7 +495,7 @@
    <item>
     <spacer name="verticalSpacer_system_monitor">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
@@ -530,10 +530,10 @@
    <item>
     <widget class="QFrame" name="frame_color_background">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_color_background">
       <property name="spacing">
@@ -572,7 +572,7 @@
          </size>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton{background-color: #000000;}</string>
@@ -598,10 +598,10 @@
    <item>
     <widget class="QFrame" name="frame_color_foreground_palette_name">
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_frame_color_foreground_palette_name">
       <property name="spacing">
@@ -654,7 +654,7 @@
       <item>
        <spacer name="horizontalSpacer_color_foreground_palette_name">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -670,7 +670,7 @@
    <item>
     <spacer name="verticalSpacer_colors">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
@@ -708,7 +708,7 @@
         <string>Changes were saved!</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -718,7 +718,7 @@
      <item>
       <spacer name="horizontalSpacer_defaults">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -731,7 +731,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_back_to_defaults">
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="text">
         <string>Back to defaults</string>
@@ -741,7 +741,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_apply">
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="text">
         <string>Apply changes</string>

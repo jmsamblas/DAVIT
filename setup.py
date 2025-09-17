@@ -90,7 +90,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://gitlab.cern.ch/bisw-python/{}'.format(NAME),
     packages=find_packages(),
-    python_requires='~=3.9',
+    python_requires='>=3.11',
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

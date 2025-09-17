@@ -98,7 +98,7 @@ class MainAnalysis(QWidget):
         if self.dataframe.shape[1] >= self.max_n_columns and not (self.global_parent and self.global_parent.auto_transpose):
             message_title = "Error"
             message_text = "Current dataframe has too many columns. Please, try to transpose it (top-right corner button) in order to properly analyze the data."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self.global_parent)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.global_parent)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             self.too_many_columns = True
@@ -151,7 +151,7 @@ class MainAnalysis(QWidget):
 
         # center main window
         frame_geometry = self.frameGeometry()
-        frame_geometry.moveCenter(QDesktopWidget().availableGeometry().center())
+        frame_geometry.moveCenter(screen_rect.center())
         self.move(frame_geometry.topLeft())
 
         return
@@ -185,8 +185,8 @@ class MainAnalysis(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
         self.verticalLayout_frame_holder.addWidget(self.frame_holder)
 
@@ -198,8 +198,8 @@ class MainAnalysis(QWidget):
 
         # create the tab widget
         self.tabWidget = QTabWidget(self.frame_holder)
-        self.tabWidget.setTabPosition(QTabWidget.North)
-        self.tabWidget.setTabShape(QTabWidget.Rounded)
+        self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget.setTabShape(QTabWidget.TabShape.Rounded)
         self.tabWidget.setObjectName("tabWidget")
         self.verticalLayout_stack.addWidget(self.tabWidget)
 
@@ -218,7 +218,7 @@ class MainAnalysis(QWidget):
             self.transpose_button = CustomCornerWidget(self.display_name, self.dataframe.shape[0], self.dataframe.shape[1], auto_transpose=self.global_parent.auto_transpose, parent=self.tabWidget)
         else:
             self.transpose_button = CustomCornerWidget(self.display_name, self.dataframe.shape[0], self.dataframe.shape[1], parent=self.tabWidget)
-        self.tabWidget.setCornerWidget(self.transpose_button, Qt.TopRightCorner)
+        self.tabWidget.setCornerWidget(self.transpose_button, Qt.Corner.TopRightCorner)
 
         # init tab
         self.tabWidget.setCurrentIndex(self.last_selected_sub_tab)
@@ -264,7 +264,7 @@ class MainAnalysis(QWidget):
         if self.dataframe.shape[0] >= self.max_n_columns:
             message_title = "Error"
             message_text = "Unable to transpose the dataframe as the resulting matrix would have too many columns."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             if self.global_parent:
@@ -322,7 +322,7 @@ class MainAnalysis(QWidget):
                 self.transpose_button.update_transpose_button_style(self.global_parent.auto_transpose)
 
         # process events
-        self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return
 
@@ -362,7 +362,7 @@ class MainAnalysis(QWidget):
             self.tabWidget.blockSignals(True)
             for tab in range(0, self.tabWidget.count()):
                 widget = self.tabWidget.widget(0)
-                widget.setAttribute(Qt.WA_DeleteOnClose)
+                widget.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
                 widget.close()
                 self.tabWidget.removeTab(0)
             self.stats_tab = None

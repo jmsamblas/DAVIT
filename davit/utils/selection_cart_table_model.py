@@ -32,10 +32,10 @@ class SelectionCartTableModel(QAbstractTableModel):
 
     def headerData(self, section, orientation, role):
 
-        if role == Qt.DisplayRole:
-            if orientation == Qt.Horizontal:
+        if role == Qt.ItemDataRole.DisplayRole:
+            if orientation == Qt.Orientation.Horizontal:
                 return self._header_labels[section]
-            elif orientation == Qt.Vertical:
+            elif orientation == Qt.Orientation.Vertical:
                 return str(section)
 
     #----------------------------------------------#
@@ -45,7 +45,7 @@ class SelectionCartTableModel(QAbstractTableModel):
         row = index.row()
         col = index.column()
 
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             if not self._result_table:
                 if self._header_labels[col] == "Options":
                     return None
@@ -54,10 +54,10 @@ class SelectionCartTableModel(QAbstractTableModel):
             else:
                 return self._data[row][col]
 
-        elif role == Qt.TextAlignmentRole:
-            return Qt.AlignCenter
+        elif role == Qt.ItemDataRole.TextAlignmentRole:
+            return Qt.AlignmentFlag.AlignCenter
 
-        elif role == Qt.BackgroundRole:
+        elif role == Qt.ItemDataRole.BackgroundRole:
             if self._result_table:
                 if self._data[row][col] == "":
                     return QBrush(QColor("#FFD0D0"))
@@ -92,7 +92,7 @@ class SelectionCartTableModel(QAbstractTableModel):
 
     def flags(self, index):
         col = index.column()
-        return Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
 
     #----------------------------------------------#
 

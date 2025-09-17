@@ -118,7 +118,7 @@ class StatsOptionsDialog(QDialog):
         self.combobox_column_names.setMinimumWidth(260)
 
         # vertical spacer
-        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.main_layout.addSpacerItem(self.v_spacer)
 
         # confirmation panel
@@ -126,7 +126,7 @@ class StatsOptionsDialog(QDialog):
         self.confirmation_layout = QHBoxLayout(self.confirmation_frame)
         self.confirmation_layout.setContentsMargins(0, 0, 0, 0)
         self.confirmation_frame.setLayout(self.confirmation_layout)
-        spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.label_question = QLabel(text="Do you want to run the analysis? ", parent=self.confirmation_frame)
         self.btn_yes = QPushButton(text="Yes", parent=self.confirmation_frame)
         self.btn_no = QPushButton(text="No", parent=self.confirmation_frame)
@@ -251,7 +251,7 @@ class StatsTab(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -260,8 +260,8 @@ class StatsTab(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -278,8 +278,8 @@ class StatsTab(QWidget):
 
         # options frame
         self.frame_opts = QFrame(self.frame_holder)
-        self.frame_opts.setFrameShape(QFrame.NoFrame)
-        self.frame_opts.setFrameShadow(QFrame.Raised)
+        self.frame_opts.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_opts.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_opts.setObjectName("frame_opts")
 
         # layour for the options
@@ -288,7 +288,7 @@ class StatsTab(QWidget):
         self.horizontalLayout_frame_opts.setSpacing(14)
 
         # left spacer
-        self.spacer_opts_labels_left = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_left = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_left)
 
         # run stats button
@@ -304,7 +304,7 @@ class StatsTab(QWidget):
         self.horizontalLayout_frame_opts.addWidget(self.button_save_results)
 
         # right spacer
-        self.spacer_opts_labels_right = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_right = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_right)
 
         # info button
@@ -317,13 +317,13 @@ class StatsTab(QWidget):
         self.verticalLayout_stack.addWidget(self.frame_opts)
 
         # create a QSplitter (vertical) for the Plot and Table
-        self.splitter = QSplitter(Qt.Vertical, self.frame_holder)
+        self.splitter = QSplitter(Qt.Orientation.Vertical, self.frame_holder)
         self.verticalLayout_stack.addWidget(self.splitter, stretch=1)
 
         # plot frame (top part of the splitter)
         self.frame_plot = QFrame(self.splitter)
-        self.frame_plot.setFrameShape(QFrame.NoFrame)
-        self.frame_plot.setFrameShadow(QFrame.Raised)
+        self.frame_plot.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_plot.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_plot.setObjectName("frame_plot")
         self.verticalLayout_plot = QVBoxLayout(self.frame_plot)
         self.verticalLayout_plot.setContentsMargins(0, 15-8, 0, 15)
@@ -343,8 +343,8 @@ class StatsTab(QWidget):
 
         # table frame (bottom part of the splitter)
         self.frame_results = QFrame(self.splitter)
-        self.frame_results.setFrameShape(QFrame.NoFrame)
-        self.frame_results.setFrameShadow(QFrame.Raised)
+        self.frame_results.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_results.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_results.setObjectName("frame_results")
         self.verticalLayout_results = QVBoxLayout(self.frame_results)
         self.verticalLayout_results.setContentsMargins(0, 8, 0, 15)
@@ -352,7 +352,7 @@ class StatsTab(QWidget):
 
         # add a centered title above the table
         self.label_table_title = QLabel("Statistics Table", self.frame_results)
-        self.label_table_title.setAlignment(Qt.AlignCenter)
+        self.label_table_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_table_title.setStyleSheet("font-weight: bold;")
         self.verticalLayout_results.addWidget(self.label_table_title)
 
@@ -447,9 +447,9 @@ class StatsTab(QWidget):
         )
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("Detailed Statistics and Plot Information")
-        msg_box.setTextFormat(Qt.RichText)
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
         msg_box.setText(info_text)
-        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
         msg_box.exec_()
 
@@ -582,7 +582,7 @@ class StatsTab(QWidget):
         if not non_numeric.empty:
             message_title = "Error"
             message_text = "Unable to run analysis because non-numeric columns were found."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
             message_box.exec_()
             return
@@ -592,7 +592,7 @@ class StatsTab(QWidget):
         if self.selected_plot_type == "Bean Plot" and self.selected_analysis_type != "All Columns" and numeric_df.shape[1] > self.max_n_columns:
             message_title = "Error"
             message_text = "Cannot display Bean Plot when over {} columns are present.".format(self.max_n_columns)
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
             message_box.exec_()
             return
@@ -601,7 +601,7 @@ class StatsTab(QWidget):
         if self.selected_plot_type == "Evolution" and numeric_df.shape[1] < 2:
             message_title = "Error"
             message_text = "Evolution plot requires at least 2 numeric columns."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
             message_box.exec_()
             return
@@ -642,9 +642,9 @@ class StatsTab(QWidget):
             self.current_legend.mousePressEvent = lambda ev: None
             self.current_legend.mouseReleaseEvent = lambda ev: None
             self.current_legend.mouseDragEvent = lambda ev: None
-            evo_pen_mean = pg.mkPen(color=(155, 255, 0), width=2, style=Qt.SolidLine)  # Cyan
-            evo_pen_median = pg.mkPen(color=(0, 197, 255), width=2, style=Qt.SolidLine)  # Hot pink
-            evo_pen_error = pg.mkPen(color=(200, 200, 200), width=1, style=Qt.SolidLine)  # Light gray
+            evo_pen_mean = pg.mkPen(color=(155, 255, 0), width=2, style=Qt.PenStyle.SolidLine)  # Cyan
+            evo_pen_median = pg.mkPen(color=(0, 197, 255), width=2, style=Qt.PenStyle.SolidLine)  # Hot pink
+            evo_pen_error = pg.mkPen(color=(200, 200, 200), width=1, style=Qt.PenStyle.SolidLine)  # Light gray
             evo_pen_fill = pg.mkPen(color=(150, 255, 244), width=0)  # dummy for fill legend
             dummy_evo_mean = pg.PlotDataItem([0], [0], pen=evo_pen_mean)
             dummy_evo_median = pg.PlotDataItem([0], [0], pen=evo_pen_median)
@@ -675,9 +675,9 @@ class StatsTab(QWidget):
             self.current_legend.mousePressEvent = lambda ev: None
             self.current_legend.mouseReleaseEvent = lambda ev: None
             self.current_legend.mouseDragEvent = lambda ev: None
-            bean_pen_mean = pg.mkPen(color=(155, 255, 0), width=2, style=Qt.DashLine)
-            bean_pen_median = pg.mkPen(color=(0, 197, 255), width=2, style=Qt.DashLine)
-            bean_pen_kde = pg.mkPen(color=(150, 255, 244), width=2, style=Qt.SolidLine)
+            bean_pen_mean = pg.mkPen(color=(155, 255, 0), width=2, style=Qt.PenStyle.DashLine)
+            bean_pen_median = pg.mkPen(color=(0, 197, 255), width=2, style=Qt.PenStyle.DashLine)
+            bean_pen_kde = pg.mkPen(color=(150, 255, 244), width=2, style=Qt.PenStyle.SolidLine)
             dummy_bean_mean = pg.PlotDataItem([0], [0], pen=bean_pen_mean)
             dummy_bean_median = pg.PlotDataItem([0], [0], pen=bean_pen_median)
             dummy_bean_kde = pg.PlotDataItem([0], [0], pen=bean_pen_kde)
@@ -695,7 +695,7 @@ class StatsTab(QWidget):
 
         # range and refresh
         self.plot.getViewBox().autoRange()
-        self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return
 
@@ -734,8 +734,8 @@ class StatsTab(QWidget):
         x_left = x_center - density_scaled
 
         # draw KDE outline as two curves
-        line_outline_right = pg.PlotCurveItem(x=x_right, y=grid, pen=pg.mkPen(color=(150, 255, 244), width=0, style=Qt.SolidLine))
-        line_outline_left = pg.PlotCurveItem(x=x_left, y=grid, pen=pg.mkPen(color=(150, 255, 244), width=0, style=Qt.SolidLine))
+        line_outline_right = pg.PlotCurveItem(x=x_right, y=grid, pen=pg.mkPen(color=(150, 255, 244), width=0, style=Qt.PenStyle.SolidLine))
+        line_outline_left = pg.PlotCurveItem(x=x_left, y=grid, pen=pg.mkPen(color=(150, 255, 244), width=0, style=Qt.PenStyle.SolidLine))
         self.plot.addItem(line_outline_right)
         self.plot.addItem(line_outline_left)
 
@@ -757,8 +757,8 @@ class StatsTab(QWidget):
         # horizontal dashed lines for mean and median
         mean_val = np.mean(data)
         median_val = np.median(data)
-        mean_line = pg.PlotDataItem(x=[x_center - 0.3, x_center + 0.3], y=[mean_val, mean_val], pen=pg.mkPen(color=(155, 255, 0), width=2, style=Qt.DashLine))
-        median_line = pg.PlotDataItem(x=[x_center - 0.3, x_center + 0.3], y=[median_val, median_val], pen=pg.mkPen(color=(0, 197, 255), width=2, style=Qt.DashLine))
+        mean_line = pg.PlotDataItem(x=[x_center - 0.3, x_center + 0.3], y=[mean_val, mean_val], pen=pg.mkPen(color=(155, 255, 0), width=2, style=Qt.PenStyle.DashLine))
+        median_line = pg.PlotDataItem(x=[x_center - 0.3, x_center + 0.3], y=[median_val, median_val], pen=pg.mkPen(color=(0, 197, 255), width=2, style=Qt.PenStyle.DashLine))
         self.plot.addItem(mean_line)
         self.plot.addItem(median_line)
 
@@ -822,7 +822,7 @@ class StatsTab(QWidget):
         if numeric_df.shape[1] < 2:
             message_title = "Error"
             message_text = "Evolution plot requires at least 2 numeric columns."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
             message_box.exec_()
             return
@@ -861,8 +861,8 @@ class StatsTab(QWidget):
         perc75 = np.array(perc75)
 
         # plot evolution lines for mean and median
-        mean_evo = pg.PlotCurveItem(x=x_vals, y=means, pen=pg.mkPen(color=(155, 255, 0), width=2, style=Qt.DashLine))
-        median_evo = pg.PlotCurveItem(x=x_vals, y=medians, pen=pg.mkPen(color=(0, 197, 255), width=2, style=Qt.DashLine))
+        mean_evo = pg.PlotCurveItem(x=x_vals, y=means, pen=pg.mkPen(color=(155, 255, 0), width=2, style=Qt.PenStyle.DashLine))
+        median_evo = pg.PlotCurveItem(x=x_vals, y=medians, pen=pg.mkPen(color=(0, 197, 255), width=2, style=Qt.PenStyle.DashLine))
         self.plot.addItem(mean_evo)
         self.plot.addItem(median_evo)
 
@@ -900,7 +900,7 @@ class StatsTab(QWidget):
         if self.df_stats.empty:
             message_title = "Error"
             message_text = "Unable to save analysis: No statistics computed."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return
@@ -943,7 +943,7 @@ class StatsTab(QWidget):
             # show success message
             message_title = "Success"
             message_text = f"The analysis has been successfully saved to:\n{name}"
-            message_box = QMessageBox(QMessageBox.Information, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 
@@ -951,7 +951,7 @@ class StatsTab(QWidget):
         except Exception as xcp:
             message_title = "Error"
             message_text = "Unable to save analysis due to the following exception:\n{}".format(xcp)
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 

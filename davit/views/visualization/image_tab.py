@@ -83,7 +83,7 @@ class ImageTab(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -92,8 +92,8 @@ class ImageTab(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea

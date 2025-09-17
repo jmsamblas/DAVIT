@@ -193,7 +193,7 @@ class PlotTab(QWidget):
         if len(axis_list) > 9:
             message_title = "Error"
             message_text = ("Unable to automatically set axes if the number of plots is larger than 9. Current number of selected plots: {}".format(len(axis_list)))
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
         else:
@@ -215,7 +215,7 @@ class PlotTab(QWidget):
             # set scroll area (to make widget resizable)
             self.scroll_area = QScrollArea(self)
             self.scroll_area.setWidgetResizable(True)
-            self.scroll_area.setFrameShape(QFrame.NoFrame)
+            self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
             # layout of the form
             self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -224,8 +224,8 @@ class PlotTab(QWidget):
 
             # holder of the form
             self.frame_holder = QFrame(self)
-            self.frame_holder.setFrameShape(QFrame.NoFrame)
-            self.frame_holder.setFrameShadow(QFrame.Raised)
+            self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+            self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
             self.frame_holder.setObjectName("frame_holder")
 
             # set the main frame as the widget of the QScrollArea
@@ -242,8 +242,8 @@ class PlotTab(QWidget):
 
             # create frame for the plots
             self.frame_plots = QFrame(self.frame_holder)
-            self.frame_plots.setFrameShape(QFrame.NoFrame)
-            self.frame_plots.setFrameShadow(QFrame.Plain)
+            self.frame_plots.setFrameShape(QFrame.Shape.NoFrame)
+            self.frame_plots.setFrameShadow(QFrame.Shadow.Plain)
             self.frame_plots.setObjectName("frame_plots")
 
             # scroll size handling
@@ -260,8 +260,8 @@ class PlotTab(QWidget):
 
             # holder of the form
             self.frame_holder = QFrame(self)
-            self.frame_holder.setFrameShape(QFrame.NoFrame)
-            self.frame_holder.setFrameShadow(QFrame.Raised)
+            self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+            self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
             self.frame_holder.setObjectName("frame_holder")
 
             # add the frame directly to the layout
@@ -275,8 +275,8 @@ class PlotTab(QWidget):
 
             # create frame for the plots
             self.frame_plots = QFrame(self.frame_holder)
-            self.frame_plots.setFrameShape(QFrame.NoFrame)
-            self.frame_plots.setFrameShadow(QFrame.Plain)
+            self.frame_plots.setFrameShape(QFrame.Shape.NoFrame)
+            self.frame_plots.setFrameShadow(QFrame.Shadow.Plain)
             self.frame_plots.setObjectName("frame_plots")
 
         # layout of the frame for the plots
@@ -345,8 +345,8 @@ class PlotTab(QWidget):
 
         # frame for the toolbar at the bottom of the plot
         self.frame_bottom_of_the_plot = QFrame(self.frame_holder)
-        self.frame_bottom_of_the_plot.setFrameShape(QFrame.NoFrame)
-        self.frame_bottom_of_the_plot.setFrameShadow(QFrame.Plain)
+        self.frame_bottom_of_the_plot.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_bottom_of_the_plot.setFrameShadow(QFrame.Shadow.Plain)
         self.frame_bottom_of_the_plot.setObjectName("frame_bottom_of_the_plot")
 
         # layout of the frame for the toolbar at the bottom of the plot
@@ -468,7 +468,7 @@ class PlotTab(QWidget):
         self.symlog_mode = (prev_scale == "SYMLOG")
 
         # spacer to move everything to the left
-        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_bottom_of_the_plot.addItem(self.spacerItem)
 
         # to enable or not 1 button mouse mode by default
@@ -667,7 +667,7 @@ class PlotTab(QWidget):
             else:
                 message_title = "Error"
                 message_text = "No curves to plot after all-zero removal."
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
 
@@ -1494,7 +1494,7 @@ class PlotTab(QWidget):
             self,
             "Plot Toolbar Information",
             html,
-            QMessageBox.Ok
+            QMessageBox.StandardButton.Ok
         )
 
     #----------------------------------------------#

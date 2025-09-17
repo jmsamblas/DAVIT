@@ -28,18 +28,18 @@ class BigDataFrameModel(QAbstractTableModel):
     def columnCount(self, parent=None):
         return self._data.shape[1]
 
-    def data(self, index, role=Qt.DisplayRole):
+    def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         if index.isValid():
-            if role == Qt.DisplayRole:
+            if role == Qt.ItemDataRole.DisplayRole:
                 return str(self._data.iloc[index.row(), index.column()])
-            elif role == Qt.TextAlignmentRole:
-                return Qt.AlignCenter
+            elif role == Qt.ItemDataRole.TextAlignmentRole:
+                return Qt.AlignmentFlag.AlignCenter
         return None
 
-    def headerData(self, section, orientation, role=Qt.DisplayRole):
-        if role != Qt.DisplayRole:
+    def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
+        if role != Qt.ItemDataRole.DisplayRole:
             return None
-        if orientation == Qt.Horizontal:
+        if orientation == Qt.Orientation.Horizontal:
             return str(self._data.columns[section])
         else:
             return str(self._data.index[section])
@@ -68,16 +68,16 @@ class BigDataTableView(QTableView):
         self.hack_timer.start(30)
 
     def typical_attrs(self):
-        self.setFrameShape(QFrame.StyledPanel)
-        self.setFrameShadow(QFrame.Plain)
+        self.setFrameShape(QFrame.Shape.StyledPanel)
+        self.setFrameShadow(QFrame.Shadow.Plain)
         self.setDragEnabled(False)
         self.setAlternatingRowColors(False)
-        self.setFocusPolicy(Qt.ClickFocus)
+        self.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.setShowGrid(True)
-        self.setGridStyle(Qt.SolidLine)
+        self.setGridStyle(Qt.PenStyle.SolidLine)
         self.horizontalHeader().setHighlightSections(False)
-        self.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
+        self.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         self.horizontalHeader().setStretchLastSection(True)
         self.horizontalHeader().setVisible(True)
         self.horizontalHeader().setFixedHeight(30)
@@ -85,11 +85,11 @@ class BigDataTableView(QTableView):
         self.verticalHeader().setMinimumSectionSize(25)
         self.verticalHeader().setVisible(True)
         self.verticalHeader().setDefaultSectionSize(25)
-        self.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.setSelectionBehavior(QAbstractItemView.SelectItems)
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectItems)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
 
     def load_initial_data(self, chunk_size):
         chunk = self.df.iloc[:chunk_size, :]
@@ -107,14 +107,14 @@ class BigDataTableView(QTableView):
             model.layoutChanged.emit()
 
     def keyPressEvent(self, event: QKeyEvent):
-        if event.key() == Qt.Key_End:
+        if event.key() == Qt.Key.Key_End:
             self.load_initial_data(self.df.shape[0])
             self.scrollToBottom()
-        elif event.key() == Qt.Key_Home:
+        elif event.key() == Qt.Key.Key_Home:
             self.scrollToTop()
-        elif event.key() == Qt.Key_PageUp:
+        elif event.key() == Qt.Key.Key_PageUp:
             self.scroll_by_chunk(-1)
-        elif event.key() == Qt.Key_PageDown:
+        elif event.key() == Qt.Key.Key_PageDown:
             self.scroll_by_chunk(1)
         else:
             super().keyPressEvent(event)

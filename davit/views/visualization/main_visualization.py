@@ -101,7 +101,7 @@ class MainVisualization(QWidget):
         if self.dataframe.shape[1] >= self.max_n_columns and not (self.global_parent and self.global_parent.auto_transpose):
             message_title = "Error"
             message_text = "Current dataframe has too many columns. Please, try to transpose it (top-right corner button) in order to properly visualize the data."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self.global_parent)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.global_parent)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             self.too_many_columns = True
@@ -147,17 +147,17 @@ class MainVisualization(QWidget):
                 self.progress_dialog.setMinimumHeight(75)
                 self.progress_dialog.setMinimumWidth(600)
                 self.progress_dialog.setAutoClose(False)
-                self.progress_dialog.setWindowModality(Qt.ApplicationModal)
+                self.progress_dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
                 self.progress_dialog.closeEvent = closeEventIgnore
                 self.progress_dialog.setWindowTitle("Progress")
                 self.progress_dialog.setWindowIcon(qta.icon("mdi6.timer-sand"))
                 self.progress_dialog.show()
                 self.progress_dialog.repaint()
-                self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
                 self.progress_dialog.setValue(0)
                 self.progress_dialog.repaint()
                 sleep(0.1)
-                self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
                 sleep(0.025)
 
             # check column names make sense
@@ -169,7 +169,7 @@ class MainVisualization(QWidget):
                 self.progress_dialog.setValue(1)
                 self.progress_dialog.repaint()
                 sleep(0.025)
-                self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
                 sleep(0.025)
 
             # update progress bar
@@ -177,7 +177,7 @@ class MainVisualization(QWidget):
                 self.progress_dialog.setValue(2)
                 self.progress_dialog.repaint()
                 sleep(0.025)
-                self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
                 sleep(0.025)
 
         return
@@ -196,7 +196,7 @@ class MainVisualization(QWidget):
 
         # center main window
         frame_geometry = self.frameGeometry()
-        frame_geometry.moveCenter(QDesktopWidget().availableGeometry().center())
+        frame_geometry.moveCenter(screen_rect.center())
         self.move(frame_geometry.topLeft())
 
         return
@@ -236,8 +236,8 @@ class MainVisualization(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
         self.verticalLayout_frame_holder.addWidget(self.frame_holder)
 
@@ -249,8 +249,8 @@ class MainVisualization(QWidget):
 
         # create the tab widget
         self.tabWidget = QTabWidget(self.frame_holder)
-        self.tabWidget.setTabPosition(QTabWidget.North)
-        self.tabWidget.setTabShape(QTabWidget.Rounded)
+        self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
+        self.tabWidget.setTabShape(QTabWidget.TabShape.Rounded)
         self.tabWidget.setObjectName("tabWidget")
         self.verticalLayout_stack.addWidget(self.tabWidget)
 
@@ -271,7 +271,7 @@ class MainVisualization(QWidget):
             self.transpose_button = CustomCornerWidget(self.display_name, self.dataframe.shape[0], self.dataframe.shape[1], auto_transpose=self.global_parent.auto_transpose, parent=self.tabWidget)
         else:
             self.transpose_button = CustomCornerWidget(self.display_name, self.dataframe.shape[0], self.dataframe.shape[1], parent=self.tabWidget)
-        self.tabWidget.setCornerWidget(self.transpose_button, Qt.TopRightCorner)
+        self.tabWidget.setCornerWidget(self.transpose_button, Qt.Corner.TopRightCorner)
 
         # disable some tabs for big data mode
         if self.big_data_mode:
@@ -285,7 +285,7 @@ class MainVisualization(QWidget):
             self.progress_dialog.setValue(3)
             self.progress_dialog.repaint()
             sleep(0.025)
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
             sleep(0.025)
 
         # init tab
@@ -306,7 +306,7 @@ class MainVisualization(QWidget):
             self.progress_dialog.setValue(4)
             self.progress_dialog.repaint()
             sleep(0.025)
-            self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+            self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
             sleep(0.025)
 
         return
@@ -385,7 +385,7 @@ class MainVisualization(QWidget):
         if self.dataframe.shape[0] >= self.max_n_columns:
             message_title = "Error"
             message_text = "Unable to transpose the dataframe as the resulting matrix would have too many columns."
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             if self.global_parent:
@@ -452,7 +452,7 @@ class MainVisualization(QWidget):
                 self.transpose_button.update_transpose_button_style(self.global_parent.auto_transpose)
 
         # process events
-        self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return
 
@@ -491,7 +491,7 @@ class MainVisualization(QWidget):
             self.tabWidget.blockSignals(True)
             for tab in range(0, self.tabWidget.count()):
                 widget = self.tabWidget.widget(0)
-                widget.setAttribute(Qt.WA_DeleteOnClose)
+                widget.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
                 widget.close()
                 self.tabWidget.removeTab(0)
                 del widget
