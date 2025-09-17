@@ -10,14 +10,94 @@
 # IMPORTS
 
 # pyqt imports
-from PyQt5.QtWidgets import (QMainWindow, QApplication, QFrame, QDesktopWidget, QWidget, QWidgetAction, QToolBar, QAction, QMessageBox, QFileDialog, QDialog, QCompleter, QMenuBar, QDateTimeEdit, QCalendarWidget)
-from PyQt5.QtWidgets import (QSplitter, QProgressDialog, QPushButton, QLabel, QSpacerItem, QToolButton, QComboBox, QCheckBox, QScrollArea, QAbstractScrollArea, QGroupBox, QLineEdit, QSpinBox)
-from PyQt5.QtWidgets import (QBoxLayout, QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy, QStyledItemDelegate, QShortcut, QStyle, QColorDialog)
-from PyQt5.QtWidgets import (QTableView, QAbstractItemView, QHeaderView, QTabWidget, QStackedWidget, QTreeView, QListWidget)
-from PyQt5.QtGui import (QIcon, QStandardItemModel, QStandardItem, QBrush, QColor, QPixmap, QFont, QKeySequence, QIntValidator, QDoubleValidator, QMovie, QKeyEvent, QPainter, QMouseEvent)
-from PyQt5.QtCore import (QModelIndex, QSize, Qt, QTimer, QEvent, QEventLoop, QAbstractTableModel, QObject, pyqtSignal, QPoint, QSettings, QRect, QThread, QStringListModel, QMetaObject, Q_ARG, QVariant, QSortFilterProxyModel, QDate, QTime, QDateTime)
-from PyQt5.Qt import (QItemSelectionModel, QMenu, QUrl, QDesktopServices)
-from PyQt5 import (uic)
+from PyQt6.QtWidgets import (
+    QAbstractItemView,
+    QAbstractScrollArea,
+    QApplication,
+    QBoxLayout,
+    QCalendarWidget,
+    QCheckBox,
+    QComboBox,
+    QCompleter,
+    QDateTimeEdit,
+    QDialog,
+    QFileDialog,
+    QFrame,
+    QGridLayout,
+    QGroupBox,
+    QHeaderView,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QLineEdit,
+    QMainWindow,
+    QMenu,
+    QMenuBar,
+    QMessageBox,
+    QPushButton,
+    QProgressDialog,
+    QScrollArea,
+    QSpacerItem,
+    QSpinBox,
+    QSplitter,
+    QStackedWidget,
+    QStyledItemDelegate,
+    QStyle,
+    QTabWidget,
+    QTableView,
+    QToolBar,
+    QToolButton,
+    QTreeView,
+    QVBoxLayout,
+    QWidget,
+    QWidgetAction,
+)
+from PyQt6.QtWidgets import QColorDialog
+from PyQt6.QtWidgets import QSizePolicy
+from PyQt6.QtGui import (
+    QAction,
+    QBrush,
+    QColor,
+    QDesktopServices,
+    QDoubleValidator,
+    QFont,
+    QIcon,
+    QIntValidator,
+    QKeyEvent,
+    QKeySequence,
+    QMovie,
+    QMouseEvent,
+    QPainter,
+    QPixmap,
+    QShortcut,
+    QStandardItem,
+    QStandardItemModel,
+)
+from PyQt6.QtCore import (
+    QAbstractTableModel,
+    Q_ARG,
+    QDate,
+    QDateTime,
+    QEvent,
+    QEventLoop,
+    QModelIndex,
+    QMetaObject,
+    QObject,
+    QPoint,
+    QRect,
+    QSettings,
+    QSize,
+    QSortFilterProxyModel,
+    QThread,
+    QTime,
+    QTimer,
+    Qt,
+    QVariant,
+    pyqtSignal,
+    QStringListModel,
+)
+from PyQt6.QtCore import QUrl, QItemSelectionModel
+from PyQt6 import uic
 
 # cern imports
 from accwidgets.qt import exec_app_interruptable

@@ -99,8 +99,8 @@ class NXCALSThreadsPanel(QDialog):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
         self.verticalLayout_frame_holder.addWidget(self.frame_holder)
 
@@ -113,7 +113,7 @@ class NXCALSThreadsPanel(QDialog):
         # info label
         self.label_info = QLabel(self.frame_holder)
         self.label_info.setObjectName("label_info")
-        self.label_info.setAlignment(Qt.AlignLeft)
+        self.label_info.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.label_info.setWordWrap(True)
         self.label_info.setText("In this panel you can find all the NXCALS running threads for the introduced queries. Note that you can stop/quit queries by right-clicking on the table.")
         self.verticalLayout_stack.addWidget(self.label_info)
@@ -131,28 +131,28 @@ class NXCALSThreadsPanel(QDialog):
         
         # create table
         self.tableView = QTableView(self.frame_bottom)
-        self.tableView.setFrameShape(QFrame.StyledPanel)
+        self.tableView.setFrameShape(QFrame.Shape.StyledPanel)
         self.tableView.setWordWrap(False)
-        self.tableView.setFrameShadow(QFrame.Plain)
+        self.tableView.setFrameShadow(QFrame.Shadow.Plain)
         self.tableView.setDragEnabled(False)
         self.tableView.setAlternatingRowColors(False)
-        self.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tableView.setFocusPolicy(Qt.NoFocus)
-        self.tableView.setSelectionMode(QAbstractItemView.NoSelection)
-        self.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableView.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.tableView.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.tableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableView.setShowGrid(True)
-        self.tableView.setGridStyle(Qt.SolidLine)
+        self.tableView.setGridStyle(Qt.PenStyle.SolidLine)
         self.tableView.setObjectName("tableView")
         self.tableView.horizontalHeader().setVisible(True)
         self.tableView.horizontalHeader().setHighlightSections(False)
-        self.tableView.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
+        self.tableView.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         self.tableView.horizontalHeader().setStretchLastSection(True)
         self.tableView.horizontalHeader().setFixedHeight(self.row_height)
         self.tableView.verticalHeader().setVisible(False)
         self.tableView.verticalHeader().setHighlightSections(False)
-        self.tableView.verticalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableView.verticalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.tableView.verticalHeader().setStretchLastSection(False)
         self.tableView.verticalHeader().setMinimumSectionSize(self.row_height)
         self.tableView.verticalHeader().setDefaultSectionSize(self.row_height)
@@ -183,7 +183,7 @@ class NXCALSThreadsPanel(QDialog):
                 print("Exception: {}".format(xcp))
 
             # create binding for the menu
-            self.tableView.setContextMenuPolicy(Qt.CustomContextMenu)
+            self.tableView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
             self.tableView.customContextMenuRequested.connect(lambda pos: self.tableMenuHandler(pos, table=self.tableView))
 
         # this helps with the timer UI bugs
@@ -322,7 +322,7 @@ class NXCALSThreadsPanel(QDialog):
             # show error message
             message_title = "Error"
             message_text = ("The maximum number of threads has been reached. Please wait for some queries to finish.")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return

@@ -125,7 +125,7 @@ class OptionsDialog(QDialog):
         self.grid_layout.addWidget(self.lineedit_unit, 3, 1)
 
         # vertical spacer between yes and no layout and options
-        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.main_layout.addSpacerItem(self.v_spacer)
 
         # confirmation panel
@@ -133,7 +133,7 @@ class OptionsDialog(QDialog):
         self.confirmation_layout = QHBoxLayout(self.confirmation_frame)
         self.confirmation_layout.setContentsMargins(0, 0, 0, 0)
         self.confirmation_frame.setLayout(self.confirmation_layout)
-        spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.label_question = QLabel(text="Do you want to run the analysis? ", parent=self.confirmation_frame)
         self.btn_yes = QPushButton(text="Yes", parent=self.confirmation_frame)
         self.btn_no = QPushButton(text="No", parent=self.confirmation_frame)
@@ -180,7 +180,7 @@ class OptionsDialog(QDialog):
         if int(self.spinbox_n_modes_fixed.value()) > int(self.spinbox_max_n_modes_to_display.value()):
             message_title = "Warning"
             message_text = ("n_modes cannot be larger than max_n_modes_to_display!")
-            message_box = QMessageBox(QMessageBox.Warning, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Warning, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.play-circle"))
             message_box.exec_()
             return
@@ -251,8 +251,8 @@ class SingularValuesHistogram(QWidget):
 
         # frame for plots
         self.frame_plots = QFrame(parent=self)
-        self.frame_plots.setFrameShape(QFrame.NoFrame)
-        self.frame_plots.setFrameShadow(QFrame.Plain)
+        self.frame_plots.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_plots.setFrameShadow(QFrame.Shadow.Plain)
         self.frame_plots.setObjectName("frame_plots")
 
         # layout of the frame for the plots
@@ -279,8 +279,8 @@ class SingularValuesHistogram(QWidget):
 
         # frame for the info
         self.frame_bottom = QFrame(self)
-        self.frame_bottom.setFrameShape(QFrame.NoFrame)
-        self.frame_bottom.setFrameShadow(QFrame.Plain)
+        self.frame_bottom.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_bottom.setFrameShadow(QFrame.Shadow.Plain)
         self.frame_bottom.setObjectName("frame_bottom")
 
         # layout of the frame for the info
@@ -305,7 +305,7 @@ class SingularValuesHistogram(QWidget):
         self.invisible_button.hide()
 
         # spacer to move everything to the left
-        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_bottom.addItem(self.spacerItem)
 
         # add the frame
@@ -708,7 +708,7 @@ class SvdTab(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -717,8 +717,8 @@ class SvdTab(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -735,8 +735,8 @@ class SvdTab(QWidget):
 
         # frame N1 for the opts and running analysis
         self.frame_opts = QFrame(self.frame_holder)
-        self.frame_opts.setFrameShape(QFrame.NoFrame)
-        self.frame_opts.setFrameShadow(QFrame.Raised)
+        self.frame_opts.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_opts.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_opts.setObjectName("frame_opts")
 
         # layout N1 for frame_opts
@@ -750,20 +750,20 @@ class SvdTab(QWidget):
         self.button_run_svd = QPushButton(" Run SVD Analysis", self.frame_opts)
         self.button_run_svd.setObjectName("button_run_svd")
         self.button_run_svd.setIcon(QIcon(qta.icon("fa5s.play-circle")))
-        self.horizontalLayout_frame_opts.setAlignment(self.button_run_svd, Qt.AlignCenter)
+        self.horizontalLayout_frame_opts.setAlignment(self.button_run_svd, Qt.AlignmentFlag.AlignCenter)
         
         # button for saving the results
         self.button_save_results = QPushButton(" Save Results", self.frame_opts)
         self.button_save_results.setObjectName("button_save_results")
         self.button_save_results.setIcon(QIcon(qta.icon("fa5.save")))
-        self.horizontalLayout_frame_opts.setAlignment(self.button_save_results, Qt.AlignCenter)
+        self.horizontalLayout_frame_opts.setAlignment(self.button_save_results, Qt.AlignmentFlag.AlignCenter)
 
         # add buttons to the layout
-        self.spacer_opts_labels_1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_1 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_1)
         self.horizontalLayout_frame_opts.addWidget(self.button_run_svd)
         self.horizontalLayout_frame_opts.addWidget(self.button_save_results)
-        self.spacer_opts_labels_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_2)
 
         # info button (new addition)
@@ -774,8 +774,8 @@ class SvdTab(QWidget):
 
         # frame N2 for the singular values and visualization
         self.frame_singular_values = QFrame(self.frame_holder)
-        self.frame_singular_values.setFrameShape(QFrame.NoFrame)
-        self.frame_singular_values.setFrameShadow(QFrame.Raised)
+        self.frame_singular_values.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_singular_values.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_singular_values.setObjectName("frame_singular_values")
 
         # layout N2 for frame_opts
@@ -797,8 +797,8 @@ class SvdTab(QWidget):
 
         # frame N3 for the residuals
         self.frame_residuals = QFrame(self.frame_holder)
-        self.frame_residuals.setFrameShape(QFrame.NoFrame)
-        self.frame_residuals.setFrameShadow(QFrame.Raised)
+        self.frame_residuals.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_residuals.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_residuals.setObjectName("frame_residuals")
 
         # layout N3 for frame_opts
@@ -820,8 +820,8 @@ class SvdTab(QWidget):
 
         # frame N4 for the info
         self.frame_info = QFrame(self.frame_holder)
-        self.frame_info.setFrameShape(QFrame.NoFrame)
-        self.frame_info.setFrameShadow(QFrame.Raised)
+        self.frame_info.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_info.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_info.setObjectName("frame_info")
 
         # layout N4 for frame_opts
@@ -843,12 +843,12 @@ class SvdTab(QWidget):
         self.label_SNR.setObjectName("label_SNR")
 
         # add labels to the layout (with spacers)
-        self.spacer_info_labels_1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_info_labels_1 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_info.addItem(self.spacer_info_labels_1)
         self.horizontalLayout_frame_info.addWidget(self.label_resolution)
         self.horizontalLayout_frame_info.addWidget(self.label_orbit_offset)
         self.horizontalLayout_frame_info.addWidget(self.label_SNR)
-        self.spacer_info_labels_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_info_labels_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_info.addItem(self.spacer_info_labels_2)
 
         # set stretch factors
@@ -910,9 +910,9 @@ class SvdTab(QWidget):
         )
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("SVD Analysis Information")
-        msg_box.setTextFormat(Qt.RichText)
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
         msg_box.setText(info_text)
-        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
         msg_box.exec_()
 
@@ -973,7 +973,7 @@ class SvdTab(QWidget):
         except Exception as xcp:
             message_title = "Error"
             message_text = ("Unable to run analysis due to the following exception: {}".format(xcp))
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.play-circle"))
             message_box.exec_()
             return
@@ -1055,7 +1055,7 @@ class SvdTab(QWidget):
         if not self.svd_analysis:
             message_title = "Error"
             message_text = ("No analysis found!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return
@@ -1089,7 +1089,7 @@ class SvdTab(QWidget):
             # show success message
             message_title = "Success"
             message_text = ("The analysis has been successfully saved to the following path: {}".format(name))
-            message_box = QMessageBox(QMessageBox.Information, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
             message_box.exec_()
 
@@ -1099,7 +1099,7 @@ class SvdTab(QWidget):
             # show error message
             message_title = "Error"
             message_text = ("Unable to save the analysis due to: {}".format(xcp))
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
             message_box.exec_()
 

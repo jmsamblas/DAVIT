@@ -24,13 +24,13 @@ class CustomStandardItemModel(QStandardItemModel):
         if not index.isValid():
             return default_flags
         if index.column() != 0:
-            return default_flags | Qt.ItemIsEditable
+            return default_flags | Qt.ItemFlag.ItemIsEditable
         else:
-            return default_flags & ~Qt.ItemIsEditable
+            return default_flags & ~Qt.ItemFlag.ItemIsEditable
 
     def set_data(self, row, column, value):
         index = self.index(row, column)
-        self.setData(index, value, Qt.EditRole)
+        self.setData(index, value, Qt.ItemDataRole.EditRole)
 
 class ComboBoxDelegate(QStyledItemDelegate):
 
@@ -156,7 +156,7 @@ class PlotDataSelector(QDialog):
         self.pushButton_no.clicked.connect(self.rejectOverride)
 
         # Ctrl+A to select all
-        self.shorcut_Key_CtrlA_select_all = QShortcut(QKeySequence("Ctrl+A"), self.treeView, context=Qt.WidgetShortcut, activated = lambda: self.selectAll())
+        self.shorcut_Key_CtrlA_select_all = QShortcut(QKeySequence("Ctrl+A"), self.treeView, context=Qt.ShortcutContext.WidgetShortcut, activated = lambda: self.selectAll())
 
         # button to select all
         self.pushButton_select_all.clicked.connect(self.selectAll)
@@ -230,10 +230,10 @@ class PlotDataSelector(QDialog):
         # retrieve the axis value
         for row in range(self.model_treeView.rowCount()):
             index = self.model_treeView.index(row, 0)
-            value = index.data(Qt.DisplayRole)
+            value = index.data(Qt.ItemDataRole.DisplayRole)
             if value == search_string:
                 index_second_col = self.model_treeView.index(row, 1)
-                second_col_value = index_second_col.data(Qt.DisplayRole)
+                second_col_value = index_second_col.data(Qt.ItemDataRole.DisplayRole)
                 return second_col_value
                 break
 

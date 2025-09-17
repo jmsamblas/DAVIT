@@ -52,7 +52,7 @@ class CustomMultiPlotItemSample(pg.graphicsItems.LegendItem.ItemSample):
         # check for modifiers
         booleanControlModifier = False
         if event.modifiers():
-            if event.modifiers() == Qt.ControlModifier:
+            if event.modifiers() == Qt.KeyboardModifier.ControlModifier:
                 booleanControlModifier = True
 
         # make sure the click is with left button
@@ -207,9 +207,9 @@ class QVSeparationLine(QFrame):
         super().__init__()
         self.setFixedWidth(20)
         self.setMinimumHeight(1)
-        self.setFrameShape(QFrame.VLine)
-        self.setFrameShadow(QFrame.Sunken)
-        self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        self.setFrameShape(QFrame.Shape.VLine)
+        self.setFrameShadow(QFrame.Shadow.Sunken)
+        self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
 
         return
 
@@ -224,9 +224,9 @@ class QHSeparationLine(QFrame):
         super().__init__()
         self.setMinimumWidth(1)
         self.setFixedHeight(20)
-        self.setFrameShape(QFrame.HLine)
-        self.setFrameShadow(QFrame.Sunken)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
+        self.setFrameShape(QFrame.Shape.HLine)
+        self.setFrameShadow(QFrame.Shadow.Sunken)
+        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
 
         return
 
@@ -243,7 +243,7 @@ class QComboBoxNoScrollWheel(QComboBox):
 
         super(QComboBoxNoScrollWheel, self).__init__(*args, **kwargs)
         self.scrollWidget = scrollWidget
-        self.setFocusPolicy(Qt.StrongFocus)
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
     #----------------------------------------------#
 
@@ -271,7 +271,7 @@ class ScrollLabel(QScrollArea):
 		self.setWidget(content)
 		lay = QVBoxLayout(content)
 		self.label = QLabel(content)
-		self.label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+		self.label.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
 		self.label.setWordWrap(True)
 		lay.addWidget(self.label)
 

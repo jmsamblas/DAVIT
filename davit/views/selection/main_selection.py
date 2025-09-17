@@ -36,7 +36,7 @@ class OptionsCell(QWidget):
         self.button_icons = ["transpose.png", 'mdi.code-brackets', 'mdi.magnify', 'mdi.delete']
         self.button_funcs = [self.transpose, self.slice, self.visualize, self.remove]
         layout = QHBoxLayout()
-        layout.setAlignment(Qt.AlignCenter)
+        layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setSpacing(5)
         layout.setContentsMargins(0, 0, 0, 0)
         for i in range(4):
@@ -210,8 +210,8 @@ class MainSelection(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.Box)
-        self.scroll_area.setFrameShadow(QFrame.Sunken)
+        self.scroll_area.setFrameShape(QFrame.Shape.Box)
+        self.scroll_area.setFrameShadow(QFrame.Shadow.Sunken)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -220,8 +220,8 @@ class MainSelection(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -238,15 +238,15 @@ class MainSelection(QWidget):
 
         # frame for the selection
         self.frame_1 = QFrame(self.frame_holder)
-        self.frame_1.setFrameShape(QFrame.NoFrame)
-        self.frame_1.setFrameShadow(QFrame.Raised)
+        self.frame_1.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_1.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_1.setObjectName("frame_1")
         self.horizontalLayout_stack.addWidget(self.frame_1)
 
         # frame for the options
         self.frame_2 = QFrame(self.frame_holder)
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.frame_2.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
         self.horizontalLayout_stack.addWidget(self.frame_2)
 
@@ -277,29 +277,29 @@ class MainSelection(QWidget):
 
         # create table
         self.tableView_cart = QTableView(self.groupbox_selection_panel)
-        self.tableView_cart.setFrameShape(QFrame.StyledPanel)
+        self.tableView_cart.setFrameShape(QFrame.Shape.StyledPanel)
         self.tableView_cart.setWordWrap(False)
-        self.tableView_cart.setFrameShadow(QFrame.Plain)
+        self.tableView_cart.setFrameShadow(QFrame.Shadow.Plain)
         self.tableView_cart.setDragEnabled(False)
         self.tableView_cart.setAlternatingRowColors(False)
-        self.tableView_cart.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tableView_cart.setFocusPolicy(Qt.NoFocus)
-        self.tableView_cart.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.tableView_cart.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView_cart.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableView_cart.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.tableView_cart.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.tableView_cart.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableView_cart.setShowGrid(True)
-        self.tableView_cart.setGridStyle(Qt.SolidLine)
+        self.tableView_cart.setGridStyle(Qt.PenStyle.SolidLine)
         self.tableView_cart.setObjectName("tableView_cart")
         self.tableView_cart.horizontalHeader().setVisible(True)
         self.tableView_cart.horizontalHeader().setHighlightSections(False)
-        self.tableView_cart.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView_cart.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
+        self.tableView_cart.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView_cart.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         self.tableView_cart.horizontalHeader().setStretchLastSection(True)
         self.tableView_cart.horizontalHeader().setMinimumSectionSize(self.minimum_column_width)
         self.tableView_cart.horizontalHeader().setFixedHeight(self.row_height)
         self.tableView_cart.verticalHeader().setVisible(True)
         self.tableView_cart.verticalHeader().setHighlightSections(False)
-        self.tableView_cart.verticalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView_cart.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableView_cart.verticalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView_cart.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.tableView_cart.verticalHeader().setStretchLastSection(False)
         self.tableView_cart.verticalHeader().setMinimumSectionSize(self.row_height)
         self.tableView_cart.verticalHeader().setDefaultSectionSize(self.row_height)
@@ -312,29 +312,29 @@ class MainSelection(QWidget):
         # create table
         self.tableView_result = QTableView(self.groupbox_selection_panel)
         self.tableView_result.setMinimumHeight(2.3*self.row_height)
-        self.tableView_result.setFrameShape(QFrame.StyledPanel)
+        self.tableView_result.setFrameShape(QFrame.Shape.StyledPanel)
         self.tableView_result.setWordWrap(False)
-        self.tableView_result.setFrameShadow(QFrame.Plain)
+        self.tableView_result.setFrameShadow(QFrame.Shadow.Plain)
         self.tableView_result.setDragEnabled(False)
         self.tableView_result.setAlternatingRowColors(False)
-        self.tableView_result.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tableView_result.setFocusPolicy(Qt.NoFocus)
-        self.tableView_result.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.tableView_result.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableView_result.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableView_result.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.tableView_result.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.tableView_result.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableView_result.setShowGrid(True)
-        self.tableView_result.setGridStyle(Qt.SolidLine)
+        self.tableView_result.setGridStyle(Qt.PenStyle.SolidLine)
         self.tableView_result.setObjectName("tableView_result")
         self.tableView_result.horizontalHeader().setVisible(True)
         self.tableView_result.horizontalHeader().setHighlightSections(False)
-        self.tableView_result.horizontalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView_result.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
+        self.tableView_result.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView_result.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         self.tableView_result.horizontalHeader().setStretchLastSection(True)
         self.tableView_result.horizontalHeader().setMinimumSectionSize(self.minimum_column_width)
         self.tableView_result.horizontalHeader().setFixedHeight(self.row_height)
         self.tableView_result.verticalHeader().setVisible(False)
         self.tableView_result.verticalHeader().setHighlightSections(False)
-        self.tableView_result.verticalHeader().setDefaultAlignment(Qt.AlignCenter)
-        self.tableView_result.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableView_result.verticalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tableView_result.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.tableView_result.verticalHeader().setStretchLastSection(False)
         self.tableView_result.verticalHeader().setMinimumSectionSize(self.row_height)
         self.tableView_result.verticalHeader().setDefaultSectionSize(self.row_height)
@@ -409,7 +409,7 @@ class MainSelection(QWidget):
         self.label_merging_method = QLabel(self.groupbox_merging_options)
         self.label_merging_method.setObjectName("label_merging_method")
         self.label_merging_method.setText("Method")
-        self.label_merging_method.setAlignment(Qt.AlignCenter)
+        self.label_merging_method.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_groupbox_merging_options.addWidget(self.label_merging_method, 0, 0)
 
         # combobox for the method
@@ -428,7 +428,7 @@ class MainSelection(QWidget):
         self.label_merging_axis = QLabel(self.groupbox_merging_options)
         self.label_merging_axis.setObjectName("label_merging_axis")
         self.label_merging_axis.setText("Axis")
-        self.label_merging_axis.setAlignment(Qt.AlignCenter)
+        self.label_merging_axis.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_groupbox_merging_options.addWidget(self.label_merging_axis, 1, 0)
 
         # combobox for the axis
@@ -447,7 +447,7 @@ class MainSelection(QWidget):
         self.label_merging_ignore_index = QLabel(self.groupbox_merging_options)
         self.label_merging_ignore_index.setObjectName("label_merging_ignore_index")
         self.label_merging_ignore_index.setText("Ignore Index")
-        self.label_merging_ignore_index.setAlignment(Qt.AlignCenter)
+        self.label_merging_ignore_index.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_groupbox_merging_options.addWidget(self.label_merging_ignore_index, 2, 0)
 
         # combobox for the ignore index
@@ -466,7 +466,7 @@ class MainSelection(QWidget):
         self.label_merging_join_arg = QLabel(self.groupbox_merging_options)
         self.label_merging_join_arg.setObjectName("label_merging_join_arg")
         self.label_merging_join_arg.setText("Join")
-        self.label_merging_join_arg.setAlignment(Qt.AlignCenter)
+        self.label_merging_join_arg.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_groupbox_merging_options.addWidget(self.label_merging_join_arg, 3, 0)
 
         # combobox for the join argument
@@ -489,7 +489,7 @@ class MainSelection(QWidget):
         self.gridLayout_groupbox_merging_options.addWidget(self.button_apply_merging, 4, 1)
 
         # spacer item
-        self.spacer_frame_options_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.spacer_frame_options_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.verticalLayout_frame_options.addItem(self.spacer_frame_options_2)
 
         # final stretches
@@ -646,14 +646,14 @@ class MainSelection(QWidget):
             except NotImplementedError  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
-                message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+                message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
                 message_box.exec_()
                 return
@@ -667,7 +667,7 @@ class MainSelection(QWidget):
             # show error
             message_title = "Error"
             message_text = ("Dataset list is empty!")
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 
@@ -714,11 +714,11 @@ class MainSelection(QWidget):
         self.button_apply_merging.clicked.connect(self.applyMerging)
 
         # create binding for the right clicks
-        self.tableView_cart.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tableView_cart.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.tableView_cart.customContextMenuRequested.connect(lambda pos: self.tableMenuHandler(pos, table = self.tableView_cart, table_type = "cart"))
 
         # create binding for the right clicks
-        self.tableView_result.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tableView_result.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.tableView_result.customContextMenuRequested.connect(lambda pos: self.tableMenuHandler(pos, table = self.tableView_result, table_type = "result"))
 
         # hack for resizing problems
@@ -865,7 +865,7 @@ class MainSelection(QWidget):
 
         # save scrollbar status
         if fix_gui_bugs:
-            self.tableView_cart.setSelectionMode(QAbstractItemView.NoSelection)
+            self.tableView_cart.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
             current_scroll_position_v = self.tableView_cart.verticalScrollBar().value()
             current_scroll_position_h = self.tableView_cart.horizontalScrollBar().value()
 
@@ -893,7 +893,7 @@ class MainSelection(QWidget):
 
         # restore scrollbar status
         if fix_gui_bugs:
-            self.tableView_cart.setSelectionMode(QAbstractItemView.ExtendedSelection)
+            self.tableView_cart.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
             self.tableView_cart.verticalScrollBar().setValue(current_scroll_position_v)
             self.tableView_cart.horizontalScrollBar().setValue(current_scroll_position_h)
 
@@ -1102,7 +1102,7 @@ class MainSelection(QWidget):
             # show success message
             message_title = "Success"
             message_text = ("Dataframe has been successfully saved to the following path: {}".format(name))
-            message_box = QMessageBox(QMessageBox.Information, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
             message_box.exec_()
 
@@ -1112,7 +1112,7 @@ class MainSelection(QWidget):
             # show error message
             message_title = "Error"
             message_text = ("Unable to save dataframe due to: {}".format(xcp))
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
             message_box.exec_()
 

@@ -30,8 +30,8 @@ class PostMortemThreadsPanelTableModel(QAbstractTableModel):
 
     def headerData(self, section, orientation, role):
 
-        if role == Qt.DisplayRole:
-            if orientation == Qt.Horizontal:
+        if role == Qt.ItemDataRole.DisplayRole:
+            if orientation == Qt.Orientation.Horizontal:
                 return self._header_labels[section]
 
     #----------------------------------------------#
@@ -41,11 +41,11 @@ class PostMortemThreadsPanelTableModel(QAbstractTableModel):
         row = index.row()
         col = index.column()
 
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             return self._data[row][col]
 
-        elif role == Qt.TextAlignmentRole:
-            return Qt.AlignCenter
+        elif role == Qt.ItemDataRole.TextAlignmentRole:
+            return Qt.AlignmentFlag.AlignCenter
 
         return
 

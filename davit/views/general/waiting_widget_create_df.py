@@ -65,8 +65,8 @@ class WaitingWidgetCreateDf(QDialog):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
         self.verticalLayout_frame_holder.addWidget(self.frame_holder)
 
@@ -85,7 +85,7 @@ class WaitingWidgetCreateDf(QDialog):
         self.label_info = QLabel(self.frame_holder)
         self.label_info.setFont(font)
         self.label_info.setObjectName("label_info")
-        self.label_info.setAlignment(Qt.AlignCenter)
+        self.label_info.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_info.setText("Loading the data into pandas. Please, wait until this dialog automatically closes.")
         self.verticalLayout_stack.addWidget(self.label_info)
 
@@ -101,14 +101,14 @@ class WaitingWidgetCreateDf(QDialog):
         self.horizontalLayout_frame_bottom.setObjectName("horizontalLayout_frame_bottom")
 
         # spacer 1
-        self.spacer_item = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_item = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_bottom.addItem(self.spacer_item)
 
         # loading gif
         self.movie = QMovie(os.path.join(self.app_root_path, "resources", "icons", "loading_32.gif"))
         self.label_animation = QLabel(self.frame_holder)
         self.label_animation.setMaximumSize(32,32)
-        self.label_animation.setAlignment(Qt.AlignCenter)
+        self.label_animation.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_animation.setMovie(self.movie)
         self.movie.start()
         self.horizontalLayout_frame_bottom.addWidget(self.label_animation)
@@ -116,7 +116,7 @@ class WaitingWidgetCreateDf(QDialog):
         # main label
         self.label = QLabel(self.frame_holder)
         self.label.setObjectName("label")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         if isinstance(self.memory_in_mb, str):
             self.label.setText("Estimated memory size needed to allocate the dataframe: {} MB".format(self.memory_in_mb))
         else:
@@ -124,7 +124,7 @@ class WaitingWidgetCreateDf(QDialog):
         self.horizontalLayout_frame_bottom.addWidget(self.label)
 
         # spacer 2
-        self.spacer_item = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_item = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_bottom.addItem(self.spacer_item)
 
         return
@@ -140,7 +140,7 @@ class WaitingWidgetCreateDf(QDialog):
         if self.parent:
             if self.counter % 10 == 0:
                 self.repaint()
-                self.parent.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+                self.parent.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
                 self.label.setText(" Number of analyzed items: {}".format(self.counter))
 
         return

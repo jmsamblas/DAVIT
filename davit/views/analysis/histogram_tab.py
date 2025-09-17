@@ -68,7 +68,7 @@ class HistogramOptionsDialog(QDialog):
         self.label_columns.setStyleSheet("font-weight: normal; color: black;")
         self.list_widget_columns = QListWidget(self.options_group)
         self.list_widget_columns.setStyleSheet("font-weight: normal;")
-        self.list_widget_columns.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.list_widget_columns.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.list_widget_columns.addItems(self.column_list)
         self.grid_layout.addWidget(self.label_columns, 0, 0)
         self.grid_layout.addWidget(self.list_widget_columns, 0, 1)
@@ -101,7 +101,7 @@ class HistogramOptionsDialog(QDialog):
         self.grid_layout.addWidget(self.checkbox_kde, 3, 1)
 
         # vertical spacer
-        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.v_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.main_layout.addSpacerItem(self.v_spacer)
 
         # confirmation panel
@@ -109,7 +109,7 @@ class HistogramOptionsDialog(QDialog):
         self.confirmation_layout = QHBoxLayout(self.confirmation_frame)
         self.confirmation_layout.setContentsMargins(0, 0, 0, 0)
         self.confirmation_frame.setLayout(self.confirmation_layout)
-        spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.label_question = QLabel(text="Do you want to create the histogram? ", parent=self.confirmation_frame)
         self.btn_yes = QPushButton(text="Yes", parent=self.confirmation_frame)
         self.btn_no = QPushButton(text="No", parent=self.confirmation_frame)
@@ -135,7 +135,7 @@ class HistogramOptionsDialog(QDialog):
     def accept(self):
         selected_items = self.list_widget_columns.selectedItems()
         if not selected_items:
-            message_box = QMessageBox(QMessageBox.Warning, "No Selection", "Please select at least one column to plot.", parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Warning, "No Selection", "Please select at least one column to plot.", parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.chart-bar"))
             message_box.exec_()
             return
@@ -214,7 +214,7 @@ class HistogramTab(QWidget):
         # set scroll area (to make widget resizable)
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
 
         # layout of the form
         self.verticalLayout_frame_holder = QVBoxLayout(self)
@@ -223,8 +223,8 @@ class HistogramTab(QWidget):
 
         # holder of the form
         self.frame_holder = QFrame(self)
-        self.frame_holder.setFrameShape(QFrame.NoFrame)
-        self.frame_holder.setFrameShadow(QFrame.Raised)
+        self.frame_holder.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_holder.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_holder.setObjectName("frame_holder")
 
         # set the main frame as the widget of the QScrollArea
@@ -241,8 +241,8 @@ class HistogramTab(QWidget):
 
         # options frame
         self.frame_opts = QFrame(self.frame_holder)
-        self.frame_opts.setFrameShape(QFrame.NoFrame)
-        self.frame_opts.setFrameShadow(QFrame.Raised)
+        self.frame_opts.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_opts.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_opts.setObjectName("frame_opts")
 
         # layout for the options
@@ -251,7 +251,7 @@ class HistogramTab(QWidget):
         self.horizontalLayout_frame_opts.setSpacing(14)
 
         # left spacer
-        self.spacer_opts_labels_left = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_left = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_left)
 
         # run histogram button
@@ -267,7 +267,7 @@ class HistogramTab(QWidget):
         self.horizontalLayout_frame_opts.addWidget(self.button_save_results)
 
         # right spacer
-        self.spacer_opts_labels_right = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.spacer_opts_labels_right = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.horizontalLayout_frame_opts.addItem(self.spacer_opts_labels_right)
 
         # info button
@@ -281,8 +281,8 @@ class HistogramTab(QWidget):
 
         # plot frame
         self.frame_plot = QFrame(self.frame_holder)
-        self.frame_plot.setFrameShape(QFrame.NoFrame)
-        self.frame_plot.setFrameShadow(QFrame.Raised)
+        self.frame_plot.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_plot.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_plot.setObjectName("frame_plot")
         self.verticalLayout_plot = QVBoxLayout(self.frame_plot)
         self.verticalLayout_plot.setContentsMargins(0, 8, 0, 0)
@@ -334,9 +334,9 @@ class HistogramTab(QWidget):
         )
         msg_box = QMessageBox(self)
         msg_box.setWindowTitle("Histogram Information")
-        msg_box.setTextFormat(Qt.RichText)
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
         msg_box.setText(info_text)
-        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
         msg_box.exec_()
 
@@ -417,7 +417,7 @@ class HistogramTab(QWidget):
                     kde_vals = kde(x_vals)
                     if not is_density:
                         kde_vals = kde_vals * len(data) * width
-                    kde_line_pen = pg.mkPen(color=color, width=2.5, style=Qt.SolidLine)
+                    kde_line_pen = pg.mkPen(color=color, width=2.5, style=Qt.PenStyle.SolidLine)
                     kde_name = f"KDE_{col_name}"
                     kde_item = pg.PlotDataItem(x=x_vals, y=kde_vals, pen=kde_line_pen, name=kde_name)
                     self.plot.addItem(kde_item)
@@ -429,7 +429,7 @@ class HistogramTab(QWidget):
         self.plot.setLabel('left', y_label)
         self.plot.setTitle(f"Histogram of Selected Columns (Bins: {num_bins})")
         self.plot.getViewBox().autoRange()
-        self.app.processEvents(QEventLoop.ExcludeUserInputEvents)
+        self.app.processEvents(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
 
         return
 
@@ -439,7 +439,7 @@ class HistogramTab(QWidget):
 
         # check data
         if not self.histogram_data:
-            message_box = QMessageBox(QMessageBox.Critical, "Error", "No histogram data to save. Please run the analysis first.", parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, "Error", "No histogram data to save. Please run the analysis first.", parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
             return
@@ -462,7 +462,7 @@ class HistogramTab(QWidget):
                     col_group.create_dataset("bin_edges", data=data['bin_edges'])
             message_title = "Success"
             message_text = f"The histogram data has been successfully saved to:\n{name}"
-            message_box = QMessageBox(QMessageBox.Information, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 
@@ -470,7 +470,7 @@ class HistogramTab(QWidget):
         except Exception as xcp:
             message_title = "Error"
             message_text = f"Unable to save results due to the following exception:\n{xcp}"
-            message_box = QMessageBox(QMessageBox.Critical, message_title, message_text, parent=self)
+            message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
             message_box.exec_()
 
