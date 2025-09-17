@@ -192,7 +192,10 @@ class MainVisualization(QWidget):
         screen_rect = screen_object.availableGeometry()
 
         # resize main window
-        self.resize(screen_rect.width() * 6/10, screen_rect.height() * 6/10)
+        self.resize(
+            round(screen_rect.width() * 6 / 10),
+            round(screen_rect.height() * 6 / 10),
+        )
 
         # center main window
         frame_geometry = self.frameGeometry()

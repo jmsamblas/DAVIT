@@ -160,7 +160,10 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(320, 180)
 
         # resize main window
-        self.resize(screen_rect.width() * self.screen_resize_factor, screen_rect.height() * self.screen_resize_factor)
+        self.resize(
+            round(screen_rect.width() * self.screen_resize_factor),
+            round(screen_rect.height() * self.screen_resize_factor),
+        )
 
         # center main window
         frame_geometry = self.frameGeometry()
@@ -851,17 +854,19 @@ class MainWindow(QMainWindow):
 
     def resetRightAndLeftTabs(self):
 
-        # better UI experience
-        self.central_widget.setVisible(False)
+        # temporarily disable repaints while we rebuild the panels to avoid flicker
+        self.central_widget.setUpdatesEnabled(False)
 
-        # remake the tabs with empty widgets
-        self.initRightTabs(remove_tabs=True, update_last_tab_index=True, create_selection_tab=True)
+        try:
+            # remake the tabs with empty widgets
+            self.initRightTabs(remove_tabs=True, update_last_tab_index=True, create_selection_tab=True)
 
-        # refresh left tabs
-        self.refreshLeftTabs()
-
-        # better UI experience
-        self.central_widget.setVisible(True)
+            # refresh left tabs
+            self.refreshLeftTabs()
+        finally:
+            # re-enable updates and request a repaint so the widgets become visible again
+            self.central_widget.setUpdatesEnabled(True)
+            self.central_widget.update()
 
         return
 

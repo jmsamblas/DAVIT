@@ -311,7 +311,7 @@ class MainSelection(QWidget):
 
         # create table
         self.tableView_result = QTableView(self.groupbox_selection_panel)
-        self.tableView_result.setMinimumHeight(2.3*self.row_height)
+        self.tableView_result.setMinimumHeight(round(2.3 * self.row_height))
         self.tableView_result.setFrameShape(QFrame.Shape.StyledPanel)
         self.tableView_result.setWordWrap(False)
         self.tableView_result.setFrameShadow(QFrame.Shadow.Plain)
