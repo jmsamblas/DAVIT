@@ -648,14 +648,14 @@ class MainSelection(QWidget):
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
 
             # update the table
@@ -669,7 +669,7 @@ class MainSelection(QWidget):
             message_text = ("Dataset list is empty!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 
@@ -829,7 +829,7 @@ class MainSelection(QWidget):
             globalPos = table.viewport().mapToGlobal(pos)
 
             # get the selected item
-            selectedItem = menu.exec_(globalPos)
+            selectedItem = menu.exec(globalPos)
 
         return
 
@@ -967,7 +967,7 @@ class MainSelection(QWidget):
 
         # open the dialog
         self.slice_dialog = SliceDialog(key, row, df, df_before_slicing, parent=self, global_parent=self)
-        self.slice_dialog.exec_()
+        self.slice_dialog.exec()
 
         return
 
@@ -1104,7 +1104,7 @@ class MainSelection(QWidget):
             message_text = ("Dataframe has been successfully saved to the following path: {}".format(name))
             message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
-            message_box.exec_()
+            message_box.exec()
 
         # throw some error
         except Exception as xcp:
@@ -1114,7 +1114,7 @@ class MainSelection(QWidget):
             message_text = ("Unable to save dataframe due to: {}".format(xcp))
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
-            message_box.exec_()
+            message_box.exec()
 
         return
 

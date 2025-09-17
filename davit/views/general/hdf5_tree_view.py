@@ -256,7 +256,7 @@ class HDF5TreeView(QFrame):
                 self.menu_right_click_dict["open_analysis_in_new_window"].setEnabled(True)
 
         # update view
-        menu.exec_(self.treeView.viewport().mapToGlobal(position))
+        menu.exec(self.treeView.viewport().mapToGlobal(position))
 
         return
 

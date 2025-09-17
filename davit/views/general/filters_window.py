@@ -294,7 +294,7 @@ class FiltersWindow(QDialog):
             message_text = "You have reached the maximum number of allowed filters!"
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
-            message_box.exec_()
+            message_box.exec()
 
         return
     
@@ -336,7 +336,7 @@ class FiltersWindow(QDialog):
             message_text = "At least one filter is needed!"
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
-            message_box.exec_()
+            message_box.exec()
 
         return
 
@@ -399,7 +399,7 @@ class FiltersWindow(QDialog):
                 message_text = ("Successfully saved preset: {}".format(file_name))
                 message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
                 message_box.setWindowIcon(qta.icon("ri.play-list-add-fill"))
-                message_box.exec_()
+                message_box.exec()
 
         # save to parent
         else:

@@ -182,7 +182,7 @@ class OptionsDialog(QDialog):
             message_text = ("n_modes cannot be larger than max_n_modes_to_display!")
             message_box = QMessageBox(QMessageBox.Icon.Warning, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.play-circle"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # retrieve options
@@ -914,7 +914,7 @@ class SvdTab(QWidget):
         msg_box.setText(info_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
-        msg_box.exec_()
+        msg_box.exec()
 
     #----------------------------------------------#
 
@@ -943,7 +943,7 @@ class SvdTab(QWidget):
 
         # open the dialog
         self.options_dialog = OptionsDialog(max_shape=self.dataframe.shape[1], unit=self.unit, options_dialog_info=self.options_dialog_info, parent=self, global_parent=self, max_n_modes_to_display=self.max_n_modes_to_display)
-        self.options_dialog.exec_()
+        self.options_dialog.exec()
 
         return
 
@@ -975,7 +975,7 @@ class SvdTab(QWidget):
             message_text = ("Unable to run analysis due to the following exception: {}".format(xcp))
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.play-circle"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # retrieve singular values and number of modes
@@ -1057,7 +1057,7 @@ class SvdTab(QWidget):
             message_text = ("No analysis found!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # typical try except workflow
@@ -1091,7 +1091,7 @@ class SvdTab(QWidget):
             message_text = ("The analysis has been successfully saved to the following path: {}".format(name))
             message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
-            message_box.exec_()
+            message_box.exec()
 
         # throw some error
         except Exception as xcp:
@@ -1101,7 +1101,7 @@ class SvdTab(QWidget):
             message_text = ("Unable to save the analysis due to: {}".format(xcp))
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon(qta_icon))
-            message_box.exec_()
+            message_box.exec()
 
         return
 

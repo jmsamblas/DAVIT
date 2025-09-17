@@ -26,7 +26,7 @@ def main():
     plot_win.setLabel('left', 'Value')
 
     # start Qt event loop
-    app.exec_()
+    app.exec()
 
 if __name__ == '__main__':
     main()

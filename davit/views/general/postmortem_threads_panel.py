@@ -260,7 +260,7 @@ class PostMortemThreadsPanel(QDialog):
             globalPos = table.viewport().mapToGlobal(pos)
 
             # get the selected item
-            selectedItem = menu.exec_(globalPos)
+            selectedItem = menu.exec(globalPos)
 
         return
 
@@ -295,7 +295,7 @@ class PostMortemThreadsPanel(QDialog):
             message_text = ("The maximum number of threads has been reached. Please wait for some queries to finish.")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # start query in new thread

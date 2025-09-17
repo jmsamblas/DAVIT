@@ -556,7 +556,7 @@ class MainWindow(QMainWindow):
             message_text = ("No directory is currently loaded... Open a folder first!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # check if we have filters (for the moment reloadHDF5Treeview is disabled if we have filters applied)
@@ -565,7 +565,7 @@ class MainWindow(QMainWindow):
             message_text = ("Unable to reload with filters applied. Please deselect the filters and try reloading again.")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # empty last index
@@ -627,7 +627,7 @@ class MainWindow(QMainWindow):
 
             # open dialog
             self.filters_window = FiltersWindow(app=self.app, app_root_path=self.app_root_path, parent=self, current_filters_preset=self.current_filters_preset)
-            self.filters_window.exec_()
+            self.filters_window.exec()
 
         # message error
         else:
@@ -637,7 +637,7 @@ class MainWindow(QMainWindow):
             message_text = ("Unable to open filters until a valid file or directory has been loaded!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 
@@ -979,14 +979,14 @@ class MainWindow(QMainWindow):
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
 
             # set the window id
@@ -1213,14 +1213,14 @@ class MainWindow(QMainWindow):
                 message_text = ("Unable to perform {} operation because this merging is not implemented in pandas yet.".format(pandas_method))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
             except Exception  as xcp:
                 message_title = "Error"
                 message_text = ("Unable to perform {} operation due to the following exception: {}".format(pandas_method, xcp))
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return
 
             # set the window id
@@ -1504,7 +1504,7 @@ class MainWindow(QMainWindow):
                 message_text = "Not all children have the same number of elements. Unable to merge."
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
                 return pd.DataFrame([])
 
             # create a DataFrame with each child array as a separate column
@@ -1518,7 +1518,7 @@ class MainWindow(QMainWindow):
                             "are not all scalars or all 1D arrays.")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return pd.DataFrame([])
 
     #----------------------------------------------#
@@ -1576,7 +1576,7 @@ class MainWindow(QMainWindow):
             )
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon((QIcon(self.window_icon_path)))
-            message_box.exec_()
+            message_box.exec()
             return None, None, None, "memory_error"
 
         # open waiting widget
@@ -2157,7 +2157,7 @@ class MainWindow(QMainWindow):
         )
         message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
         message_box.setWindowIcon(QIcon(self.window_icon_path))
-        message_box.exec_()
+        message_box.exec()
         return
 
     #----------------------------------------------#
