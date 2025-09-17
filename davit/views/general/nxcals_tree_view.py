@@ -323,7 +323,7 @@ class NXCALSTreeView(QFrame):
         self.layout_dialog_calendar.addWidget(self.calendar)
 
         # run dialog
-        self.dialog_calendar.exec_()
+        self.dialog_calendar.exec()
 
         return
 
@@ -366,7 +366,7 @@ class NXCALSTreeView(QFrame):
             message_text = ("Please, initialize PyTimber and run a valid query in order to open the NXCALS Threads panel.")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         return
@@ -501,7 +501,7 @@ class NXCALSTreeView(QFrame):
             message_text = ("Query format is not valid!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 
@@ -695,7 +695,7 @@ class NXCALSTreeView(QFrame):
                 self.menu_right_click_dict["remove_query"].setEnabled(False)
 
         # update view
-        menu.exec_(self.treeView.viewport().mapToGlobal(position))
+        menu.exec(self.treeView.viewport().mapToGlobal(position))
 
         return
 
@@ -794,7 +794,7 @@ class NXCALSTreeView(QFrame):
             message_text = ("Unable to init the NXCALS treeview as there are threads still running!")
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.threads_panel.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 

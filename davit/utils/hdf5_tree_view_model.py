@@ -780,7 +780,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         message_text = ("{}".format(xcp))
         message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.parent.global_parent)
         message_box.setWindowIcon(QIcon(self.parent.global_parent.window_icon_path))
-        message_box.exec_()
+        message_box.exec()
 
         return
 
@@ -803,7 +803,7 @@ class HDF5TreeViewModel(QStandardItemModel):
         message_text = "The file cannot be opened because it is probably corrupted."
         message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.parent.global_parent)
         message_box.setWindowIcon(QIcon(self.parent.global_parent.window_icon_path))
-        message_box.exec_()
+        message_box.exec()
 
         return
 

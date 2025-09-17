@@ -195,7 +195,7 @@ class PlotTab(QWidget):
             message_text = ("Unable to automatically set axes if the number of plots is larger than 9. Current number of selected plots: {}".format(len(axis_list)))
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
         else:
             axis_list = [f"y{i}" for i in range(1, len(axis_list)+1)]
             if not self.var_axis_dict:
@@ -603,7 +603,7 @@ class PlotTab(QWidget):
 
         # run data selector dialog
         self.plot_data_selector = PlotDataSelector(self.dataframe, self.app, self.app_root_path, self, self.saved_selected_indexes, self.saved_names, self.saved_axis_list, self.var_axis_dict, x_label=self.x_label, y_label=self.y_label)
-        self.plot_data_selector.exec_()
+        self.plot_data_selector.exec()
 
         return
 
@@ -669,7 +669,7 @@ class PlotTab(QWidget):
                 message_text = "No curves to plot after all-zero removal."
                 message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
                 message_box.setWindowIcon(QIcon(self.window_icon_path))
-                message_box.exec_()
+                message_box.exec()
 
                 # set back checkbox
                 QTimer.singleShot(0, lambda: self.checkBox_remove_all_zero_curves.setChecked(False))

@@ -103,7 +103,7 @@ class MainVisualization(QWidget):
             message_text = "Current dataframe has too many columns. Please, try to transpose it (top-right corner button) in order to properly visualize the data."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self.global_parent)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             self.too_many_columns = True
             self.setStyleSheet("QTabWidget{background-color: #F1A2A2;}")
 
@@ -390,7 +390,7 @@ class MainVisualization(QWidget):
             message_text = "Unable to transpose the dataframe as the resulting matrix would have too many columns."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             if self.global_parent:
                 self.global_parent.auto_transpose = False
                 self.transpose_button.update_transpose_button_style(self.global_parent.auto_transpose)

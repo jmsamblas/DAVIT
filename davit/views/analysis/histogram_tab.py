@@ -137,7 +137,7 @@ class HistogramOptionsDialog(QDialog):
         if not selected_items:
             message_box = QMessageBox(QMessageBox.Icon.Warning, "No Selection", "Please select at least one column to plot.", parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.chart-bar"))
-            message_box.exec_()
+            message_box.exec()
             return
         options = {
             "selected_columns": [item.text() for item in selected_items],
@@ -338,7 +338,7 @@ class HistogramTab(QWidget):
         msg_box.setText(info_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
-        msg_box.exec_()
+        msg_box.exec()
 
     #----------------------------------------------#
 
@@ -356,7 +356,7 @@ class HistogramTab(QWidget):
             default_density=self.options.get("density", False),
             default_show_kde=self.options.get("show_kde", True)
         )
-        self.options_dialog.exec_()
+        self.options_dialog.exec()
         return
 
     #----------------------------------------------#
@@ -441,7 +441,7 @@ class HistogramTab(QWidget):
         if not self.histogram_data:
             message_box = QMessageBox(QMessageBox.Icon.Critical, "Error", "No histogram data to save. Please run the analysis first.", parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # save the data
@@ -464,7 +464,7 @@ class HistogramTab(QWidget):
             message_text = f"The histogram data has been successfully saved to:\n{name}"
             message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         # display error
         except Exception as xcp:
@@ -472,7 +472,7 @@ class HistogramTab(QWidget):
             message_text = f"Unable to save results due to the following exception:\n{xcp}"
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 

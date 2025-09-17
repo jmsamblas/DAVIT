@@ -451,7 +451,7 @@ class StatsTab(QWidget):
         msg_box.setText(info_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("QLabel { min-width: 800px; }")
-        msg_box.exec_()
+        msg_box.exec()
 
     #----------------------------------------------#
 
@@ -462,7 +462,7 @@ class StatsTab(QWidget):
             default_analysis_type=self.selected_analysis_type,
             default_column_names=self.column_names_option
         )
-        self.options_dialog.exec_()
+        self.options_dialog.exec()
         return
 
     #----------------------------------------------#
@@ -584,7 +584,7 @@ class StatsTab(QWidget):
             message_text = "Unable to run analysis because non-numeric columns were found."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # for Bean Plot, do not allow if over max_n_columns numeric columns
@@ -594,7 +594,7 @@ class StatsTab(QWidget):
             message_text = "Cannot display Bean Plot when over {} columns are present.".format(self.max_n_columns)
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # for Evolution Plot, require at least 2 numeric columns
@@ -603,7 +603,7 @@ class StatsTab(QWidget):
             message_text = "Evolution plot requires at least 2 numeric columns."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # compute statistics
@@ -824,7 +824,7 @@ class StatsTab(QWidget):
             message_text = "Evolution plot requires at least 2 numeric columns."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(qta.icon("fa5s.calculator"))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # reset tickers
@@ -902,7 +902,7 @@ class StatsTab(QWidget):
             message_text = "Unable to save analysis: No statistics computed."
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
             return
 
         # try catch block
@@ -945,7 +945,7 @@ class StatsTab(QWidget):
             message_text = f"The analysis has been successfully saved to:\n{name}"
             message_box = QMessageBox(QMessageBox.Icon.Information, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         # error
         except Exception as xcp:
@@ -953,7 +953,7 @@ class StatsTab(QWidget):
             message_text = "Unable to save analysis due to the following exception:\n{}".format(xcp)
             message_box = QMessageBox(QMessageBox.Icon.Critical, message_title, message_text, parent=self)
             message_box.setWindowIcon(QIcon(self.window_icon_path))
-            message_box.exec_()
+            message_box.exec()
 
         return
 
