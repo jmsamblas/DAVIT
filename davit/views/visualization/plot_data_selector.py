@@ -337,7 +337,7 @@ class PlotDataSelector(QDialog):
         # resize the columns to equal width
         width_frame = self.treeView.frameGeometry().width()
         for column in range(0, self.model_treeView.columnCount()):
-            self.treeView.setColumnWidth(column, 0.98*(width_frame / 2))
+            self.treeView.setColumnWidth(column, round(0.98 * (width_frame / 2)))
 
         # delete the timer
         try:

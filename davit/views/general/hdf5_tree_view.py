@@ -27,6 +27,8 @@ class HDF5TreeView(QFrame):
         self.treeView_model = None
         self.treeView_model_filtered = None
         self.filters_applied = False
+        self._selection_model = None
+        self._selection_changed_handler = None
 
         # build the tree
         self.buildTree()
@@ -68,18 +70,44 @@ class HDF5TreeView(QFrame):
 
     def bindWidgetsTreeView(self, model):
 
-        # reset all connections first
+        # reset the connections we manage explicitly
         try:
-            self.treeView.disconnect()
-        except Exception as xcp:
-            print("Exception: {}".format(xcp))
+            self.treeView.expanded.disconnect()
+        except (TypeError, RuntimeError):
+            pass
+
+        try:
+            self.treeView.collapsed.disconnect()
+        except (TypeError, RuntimeError):
+            pass
+
+        try:
+            self.treeView.customContextMenuRequested.disconnect()
+        except (TypeError, RuntimeError):
+            pass
+
+        if self._selection_model and self._selection_changed_handler:
+            try:
+                self._selection_model.selectionChanged.disconnect(self._selection_changed_handler)
+            except (TypeError, RuntimeError):
+                pass
+            finally:
+                self._selection_model = None
+                self._selection_changed_handler = None
 
         # bindings for the tree model
         self.treeView.expanded.connect(model.handle_expanded)
         self.treeView.collapsed.connect(model.handle_collapsed)
 
         # binding for the click or selection
-        self.treeView.selectionModel().selectionChanged.connect(lambda: self.itemFromTreeviewSelectionChanged(model=model))
+        selection_model = self.treeView.selectionModel()
+        if selection_model is not None:
+            def _handle_selection_changed(selected, deselected, *, _model=model):
+                self.itemFromTreeviewSelectionChanged(model=_model)
+
+            selection_model.selectionChanged.connect(_handle_selection_changed)
+            self._selection_model = selection_model
+            self._selection_changed_handler = _handle_selection_changed
 
         # set up the right click menu handler
         self.treeView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
@@ -266,15 +294,24 @@ class HDF5TreeView(QFrame):
         if type_set_header_widths == "type_1":
             for column in range(0, headers_visible_length):
                 if column == 0:
-                    self.treeView.setColumnWidth(column, width_frame / 2)
+                    self.treeView.setColumnWidth(column, round(width_frame / 2))
                 else:
-                    self.treeView.setColumnWidth(column, (width_frame / 2) / (headers_visible_length - 1))
+                    self.treeView.setColumnWidth(
+                        column,
+                        round((width_frame / 2) / (headers_visible_length - 1)),
+                    )
         else:
             for column in range(0, headers_visible_length):
                 if column == 0:
-                    self.treeView.setColumnWidth(column, 1.1 * width_frame / headers_visible_length)
+                    self.treeView.setColumnWidth(
+                        column,
+                        round(1.1 * width_frame / headers_visible_length),
+                    )
                 else:
-                    self.treeView.setColumnWidth(column, width_frame / headers_visible_length)
+                    self.treeView.setColumnWidth(
+                        column,
+                        round(width_frame / headers_visible_length),
+                    )
 
         return
 
