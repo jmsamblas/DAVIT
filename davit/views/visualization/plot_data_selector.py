@@ -113,7 +113,9 @@ class PlotDataSelector(QDialog):
         self.model_treeView.setHorizontalHeaderLabels(['Variable', 'Y-axis'])
 
         # set edit triggers
-        self.treeView.setEditTriggers(QTreeView.DoubleClicked | QTreeView.EditKeyPressed)
+        self.treeView.setEditTriggers(
+            QAbstractItemView.EditTrigger.DoubleClicked | QAbstractItemView.EditTrigger.EditKeyPressed
+        )
 
         # add children items (columns) to the parent item
         for row in self.columns:
