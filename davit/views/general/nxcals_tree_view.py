@@ -938,9 +938,13 @@ class NXCALSTreeView(QFrame):
     def expand_all(self, tree_view, indexes):
         for index in indexes:
             tree_view.expand(index)
-            for i in range(index.model().rowCount(index)):
-                child_index = index.child(i, 0)
-                if child_index.isValid() and not self.more_children(child_index.model(), child_index):
+            model = index.model()
+            if model is None:
+                continue
+            row_count = model.rowCount(index)
+            for i in range(row_count):
+                child_index = model.index(i, 0, index)
+                if child_index.isValid() and not self.more_children(model, child_index):
                     self.expand_all(tree_view, [child_index])
 
     def expand_all_tracking(self, tree_view, indexes, expanded_indexes=None):
@@ -950,9 +954,13 @@ class NXCALSTreeView(QFrame):
             if not tree_view.isExpanded(index):
                 tree_view.expand(index)
                 expanded_indexes.add(index)
-            for i in range(index.model().rowCount(index)):
-                child_index = index.child(i, 0)
-                if child_index.isValid() and not self.more_children(child_index.model(), child_index):
+            model = index.model()
+            if model is None:
+                continue
+            row_count = model.rowCount(index)
+            for i in range(row_count):
+                child_index = model.index(i, 0, index)
+                if child_index.isValid() and not self.more_children(model, child_index):
                     self.expand_all_tracking(tree_view, [child_index], expanded_indexes)
         return expanded_indexes
 
@@ -961,9 +969,13 @@ class NXCALSTreeView(QFrame):
     def collapse_all(self, tree_view, indexes):
         for index in indexes:
             tree_view.collapse(index)
-            for i in range(index.model().rowCount(index)):
-                child_index = index.child(i, 0)
-                if child_index.isValid() and not self.more_children(child_index.model(), child_index):
+            model = index.model()
+            if model is None:
+                continue
+            row_count = model.rowCount(index)
+            for i in range(row_count):
+                child_index = model.index(i, 0, index)
+                if child_index.isValid() and not self.more_children(model, child_index):
                     self.collapse_all(tree_view, [child_index])
 
     def collapse_all_tracking(self, tree_view, indexes, expanded_indexes):
@@ -971,9 +983,13 @@ class NXCALSTreeView(QFrame):
             if index in expanded_indexes:
                 tree_view.collapse(index)
                 expanded_indexes.remove(index)
-            for i in range(index.model().rowCount(index)):
-                child_index = index.child(i, 0)
-                if child_index.isValid() and not self.more_children(child_index.model(), child_index):
+            model = index.model()
+            if model is None:
+                continue
+            row_count = model.rowCount(index)
+            for i in range(row_count):
+                child_index = model.index(i, 0, index)
+                if child_index.isValid() and not self.more_children(model, child_index):
                     self.collapse_all_tracking(tree_view, [child_index], expanded_indexes)
 
     #----------------------------------------------#
